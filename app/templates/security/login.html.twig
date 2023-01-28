@@ -1,0 +1,26 @@
+{% extends 'panel.html.twig' %}
+
+{% block body %}
+    <div class="panel-layout-gradient">
+        <div class="panel-content">
+            {{ form_start(loginForm) }}
+                {{ form_row(loginForm.email) }}
+                {{ form_row(loginForm.password) }}
+                {{ form_row(loginForm._csrf_token, {
+                    value: csrf_token('authenticate')
+                }) 
+            }}
+            {{ form_end(loginForm) }}
+            <a class="hover" href="/register">
+                Zarejestruj się
+            </a>
+            {% if error %}
+                <div class="alert-box">
+                    <p>
+                        {{ error.messageKey|trans(error.messageData, 'security') }}
+                    </p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

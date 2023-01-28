@@ -1,0 +1,82 @@
+*,
+html {
+    margin: 0;
+    padding: 0;
+}
+body {
+    height: 100vh;
+    padding: 0;
+    font-family: system-ui;
+}
+
+.submit-button {
+    padding: 14px;
+    border-radius: 9px;
+    border: 0;
+    background: #68b5cf;
+    color: white;
+    font-size: 18px;
+    width: 100%;
+}
+.hover:hover {
+    opacity: 0.5;
+    cursor: pointer;
+    transition: 0.2s all ease;
+}
+a {
+    text-decoration: none;
+    color: #70349d;
+}
+/* LOGIN PANEL */
+.panel-layout-gradient {
+    height: 100%;
+    background: rgb(85, 56, 84);
+    background: linear-gradient(
+        90deg,
+        rgba(85, 56, 84, 1) 0%,
+        rgba(111, 51, 157, 1) 14%,
+        rgba(143, 65, 159, 1) 44%,
+        rgba(100, 193, 212, 1) 79%,
+        rgba(0, 212, 255, 1) 100%
+    );
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.panel-content {
+    margin: auto;
+    padding: 20px;
+    height: 300px;
+    width: 400px;
+    background: white;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 46px -3px rgb(66 68 90);
+    -moz-box-shadow: 0px 0px 46px -3px rgba(66, 68, 90, 1);
+    box-shadow: 0px 0px 46px -3px rgb(255 255 255);
+}
+.panel-content .title-label {
+    font-size: 30px;
+}
+.panel-content .input-area {
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 24px;
+}
+.panel-content .input-box {
+    padding-bottom: 20px;
+}
+.panel-content .submit-box {
+    padding-top: 20px;
+}
+.panel-content a {
+    font-size: 18px;
+}
+.panel-content .alert-box {
+    font-size: 16px;
+    display: flex;
+    color: #f10808;
+    width: 100%;
+    justify-content: flex-end;
+}
