@@ -80,3 +80,12 @@ a {
     width: 100%;
     justify-content: flex-end;
 }
+.panel-content .panel-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+.panel-content .panel-title .title {
+    font-size: 32px;
+}
