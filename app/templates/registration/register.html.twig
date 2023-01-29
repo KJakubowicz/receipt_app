@@ -1,17 +1,29 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Register{% endblock %}
+{% extends 'panel.html.twig' %}
 
 {% block body %}
-    <h1>Register</h1>
-
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+    <div class="panel-layout-gradient">
+        <div class="panel-content">
+            <div class="panel-title">
+                <p class="title">
+                    Rejestracja
+                </p>
+            </div>
+            {{ form_start(registrationForm) }}
+                {{ form_row(registrationForm.email) }}
+                {{ form_row(registrationForm.plainPassword) }}
+                {{ form_row(registrationForm.agreeTerms) }}
+            {{ form_end(registrationForm) }}
+            <a class="hover" href="/login">
+                Zaloguj się
+            </a>
+            {# {% if error %}
+                <div class="alert-box">
+                    <p>
+                        {{ error.messageKey|trans(error.messageData, 'security') }}
+                    </p>
+                </div>
+            {% endif %} #}
+        </div>
+    </div>
 {% endblock %}
+
