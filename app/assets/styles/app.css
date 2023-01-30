@@ -18,6 +18,12 @@ body {
     font-size: 18px;
     width: 100%;
 }
+
+.input-checkbox {
+    margin-left: 10px;
+    width: 16px;
+    height: 16px;
+}
 .hover:hover {
     opacity: 0.5;
     cursor: pointer;
@@ -46,7 +52,7 @@ a {
 .panel-content {
     margin: auto;
     padding: 20px;
-    height: 300px;
+    min-height: 300px;
     width: 400px;
     background: white;
     border-radius: 5px;
@@ -88,4 +94,9 @@ a {
 }
 .panel-content .panel-title .title {
     font-size: 32px;
+}
+.panel-content .checkbox-content {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
 }
