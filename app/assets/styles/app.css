@@ -46,12 +46,22 @@ a {
     justify-content: space-between;
     align-items: center;
 }
-.left-side,
+.left-side {
+    font-size: 18px;
+    display: flex;
+    width: 5%;
+    justify-content: center;
+}
 .right-side {
-    width: 10%;
+    font-size: 24px;
+    display: flex;
+    width: 15%;
+    justify-content: space-evenly;
 }
 .middle-side {
     width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 /* LOGIN PANEL */
