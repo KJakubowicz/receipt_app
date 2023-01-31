@@ -33,6 +33,27 @@ a {
     text-decoration: none;
     color: #70349d;
 }
+
+.header {
+    height: 60px;
+    box-shadow: 1px -9px 24px 3px rgb(0 0 0 / 39%);
+}
+.header-inner {
+    display: flex;
+    height: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+}
+.left-side,
+.right-side {
+    width: 10%;
+}
+.middle-side {
+    width: 100%;
+}
+
 /* LOGIN PANEL */
 .panel-layout-gradient {
     height: 100%;
