@@ -33,6 +33,61 @@ a {
     text-decoration: none;
     color: #70349d;
 }
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.header {
+    height: 60px;
+    box-shadow: 1px -9px 24px 3px rgb(0 0 0 / 39%);
+}
+.header-inner {
+    display: flex;
+    height: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+}
+.left-side {
+    font-size: 18px;
+    display: flex;
+    width: 5%;
+    justify-content: center;
+}
+.right-side {
+    font-size: 24px;
+    display: flex;
+    width: 10%;
+    justify-content: space-evenly;
+}
+.middle-side {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.main-container {
+    min-height: calc(100vh - 80px);
+}
+.content {
+    margin-left: 250px;
+}
+/* MENU */
+.menu-container {
+    width: 250px;
+    height: 100%;
+}
+.menu-container-inner {
+    height: 100%;
+    padding: 15px;
+    box-shadow: 11px 0px 24px -4px rgb(31 31 31 / 69%);
+    -webkit-box-shadow: 7px 0px 10px 0px rgb(31 31 31 / 8%);
+    -moz-box-shadow: 11px 0px 24px -4px rgba(31, 31, 31, 0.69);
+}
 /* LOGIN PANEL */
 .panel-layout-gradient {
     height: 100%;
