@@ -1,0 +1,14 @@
+{% for breadcrumb in breadcrumbs %}
+    <div class="breadcrumbs-child">
+        {% if loop.last == false %}
+            <a href="{{ breadcrumb.href }}">
+                {{ breadcrumb.name }}
+            </a>
+            <i class="fa-solid fa-circle"></i>
+        {% else %}
+            <a href="#" class="active">
+                {{ breadcrumb.name }}
+            </a>
+        {% endif %}
+    </div>
+{% endfor %}
