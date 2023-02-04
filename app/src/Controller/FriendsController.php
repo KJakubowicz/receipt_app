@@ -13,6 +13,16 @@ class FriendsController extends AbstractController
     {
         return $this->render('friends/index.html.twig', [
             'controller_name' => 'FriendsController',
+            'breadcrumbs' => [
+                [
+                    'name' => 'Znajomi',
+                    'href' => '/friends'
+                ],
+                [
+                    'name' => 'Dodaj znajomego',
+                    'href' => '/friend/add'
+                ],
+            ],
         ]);
     }
 }

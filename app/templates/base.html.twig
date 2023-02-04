@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <script src="https://kit.fontawesome.com/69d388cee6.js" crossorigin="anonymous"></script>
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
@@ -14,9 +15,26 @@
         {% endblock %}
     </head>
     <body>
-        {% include '/include/header.html.twig' %}
         {% block body %}
-        
+            <div class="main-container relative">
+                <div class="main-container-inner">
+                    {% include '/include/header.html.twig' %}
+                    {% include '/include/menu.html.twig' %}
+                    <div class="content">
+                        <div class="breadcrumbs-container">
+                            <div class="breadcrumbs-inner">
+                            {% if breadcrumbs == true %}
+                                {% include '/include/breadcrumbsChild.html.twig' %}
+                            {% endif %}
+                            </div>
+                        </div>
+                        <div class="content-inner p-10">
+                            {% block content %}
+                            {% endblock %}
+                        </div>
+                    </div
+                </div>
+            </div>
         {% endblock %}
         {# {% include 'footer.html' %} #}
     </body>
