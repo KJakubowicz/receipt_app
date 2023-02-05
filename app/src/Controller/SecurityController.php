@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class SecurityController extends AbstractController
 {
-    #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils, Request $request): Response
     {
         $form = $this->createForm(LoginFormType::class);
@@ -34,8 +33,7 @@ class SecurityController extends AbstractController
             'error' => $error
         ]);
     }
-
-    #[Route(path: '/logout', name: 'app_logout')]    
+ 
     /**
      * logout
      *

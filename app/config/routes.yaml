@@ -3,3 +3,22 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+# SECURITY
+app_login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+app_logout:
+    path: /logout
+    controller: App\Controller\SecurityController::logout
+# REGISTER
+app_register:
+    path: /register
+    controller: App\Controller\RegistrationController::register
+# FRIENDS
+app_friends:
+    path: /friends
+    controller: App\Controller\FriendsController::index
+# PAYMENTS
+app_payments:
+    path: /payments
+    controller: App\Controller\PaymentsController::index
