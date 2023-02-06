@@ -13,9 +13,7 @@ abstract class ListBuilder {
         $this->listView = new ListView();
     }
 
-    abstract public function setAddButton(): void;
-
-    abstract public function setCheckButton(): void;
+    abstract public function addButton(): void;
 
     abstract public function setHeader(): void;
 

@@ -12,14 +12,21 @@ class FriendsController extends AbstractController
     public function list(): Response
     {
         $listBuilder = new FriendsListBuilder();
-        $listBuilder->setAddButton([]);
-        $listBuilder->setCheckButton([]);
+        $listBuilder->addButton([
+            'type' => 'add',
+            'properties' => [
+                'href' => '/friend/add',
+                'name' => 'Dodaj',
+                'icon' => 'fa-solid fa-circle-plus'
+            ],
+        ]);
+
         $listBuilder->setHeader([]);
         $listBuilder->setRows([]);
         $listBuilder->setPaggination(0);
         $listView = new ListMaker($listBuilder);
-
-        return $this->render('friends/index.html.twig', [
+        // dd($listView->makeList());
+        return $this->render('listView/listView.html.twig', [
             'controller_name' => 'FriendsController',
             'listView' => $listView->makeList(),
             'breadcrumbs' => [

@@ -6,14 +6,9 @@ use App\Builder\ListView\Builder\ListBuilder;
 
 class FriendsListBuilder extends ListBuilder {
 
-    public function setAddButton(array $addButon = []): void
+    public function addButton(array $button = []): void
     {
-        $this->listView->setAddButton($addButon);
-    }
-
-    public function setCheckButton(array $checkButton = []): void
-    {
-        $this->listView->setCheckButton($checkButton);
+        $this->listView->addButton($button);
     }
 
     public function setHeader(array $header = []): void

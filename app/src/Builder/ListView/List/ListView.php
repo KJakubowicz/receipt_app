@@ -5,30 +5,19 @@ namespace App\Builder\ListView\List;
 
 class ListView {
 
-    private array $_addButton;
-    private array $_checkButton;
+    private array $_button;
     private array $_header;
     private array $_rows;
     private int $_paggination;
 
-    public function setAddButton(array $addButton):void
+    public function addButton(array $button):void
     {
-        $this->_addButton = $addButton;
+        $this->_button[] = $button;
     }
 
-    public function getAddButton():array
+    public function getButtons():array
     {
-        return $this->_addButton;
-    }
-
-    public function setCheckButton(array $checkButton):void
-    {
-        $this->_checkButton = $checkButton;
-    }
-
-    public function getCheckButton():array
-    {
-        return $this->_checkButton;
+        return $this->_button;
     }
 
     public function setHeader(array $header):void
@@ -64,8 +53,7 @@ class ListView {
     public function getListData():array
     {
         return [
-            'addButton' => $this->getAddButton(),
-            'checkButton' => $this->getCheckButton(),
+            'buttons' => $this->getButtons(),
             'header' => $this->getHeader(),
             'rows' => $this->getRows(),
             'paggination' => $this->getPaggination(),
