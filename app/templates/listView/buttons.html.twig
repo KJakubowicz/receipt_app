@@ -1,0 +1,42 @@
+<div class="list-buttons-content">
+    <div class="list-buttons-inner">
+        {% if buttons %}
+            {% for button in buttons %}
+                <div class="list-buttons-element">
+                    <div class="list-buttons-element-inner">
+                        {% if button.type == 'add' %}
+                            <a href="{{button.properties.href}}" class="list-add-button">
+                                {% if button.properties.icon %}
+                                    <i class="{{button.properties.icon}}"></i>
+                                {% else %}
+                                    <p>
+                                        {{button.properties.name}}
+                                    </p>
+                                {% endif %}
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+       
+     {# {{dump(data)}} #}
+        {# <div class="list-buttons-element">
+            <div class="list-buttons-element-inner">
+                <a>
+                    <i class="fa-solid fa-circle-plus"></i>
+                </a>
+            </div>
+        </div>
+        <div class="list-buttons-element">
+            <div class="list-buttons-element-inner">
+                <a>
+                    Zaznacz wszystko
+                </a>
+            </div>
+        </div> #}
+
+
+
+    </div>
+</div>
