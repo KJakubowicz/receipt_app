@@ -11,10 +11,6 @@ class ListView {
     private array $_rows;
     private int $_paggination;
 
-    public function __construct()
-    {
-    }
-
     public function setAddButton(array $addButton):void
     {
         $this->_addButton = $addButton;
