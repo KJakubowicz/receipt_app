@@ -17,7 +17,7 @@ app_register:
 # FRIENDS
 app_friends:
     path: /friends
-    controller: App\Controller\FriendsController::index
+    controller: App\Controller\FriendsController::list
 # PAYMENTS
 app_payments:
     path: /payments
