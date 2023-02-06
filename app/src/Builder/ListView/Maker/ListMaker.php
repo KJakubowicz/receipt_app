@@ -2,13 +2,13 @@
 
 namespace App\Builder\ListView\Maker;
 
-use App\Builder\ListView\Builder\ListBulder;
+use App\Builder\ListView\Builder\ListBuilder;
 
 class ListMaker {
 
-    private ListBulder $_listBuilder;
+    private ListBuilder $_listBuilder;
 
-    public function __construct(ListBulder $builder)
+    public function __construct(ListBuilder $builder)
     {
         $this->_listBuilder = $builder;
     }

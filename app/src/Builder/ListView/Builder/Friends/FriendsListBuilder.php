@@ -31,7 +31,6 @@ class FriendsListBuilder extends ListBuilder {
         $this->listView->setPaggination($paggination);
     }
 
-
     public function getListData(): array
     {
         return $this->listView->getListData();
