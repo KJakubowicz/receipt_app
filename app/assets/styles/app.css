@@ -221,3 +221,31 @@ a {
     display: flex;
     align-items: center;
 }
+/* LISTVIEW */
+.list-view-content {
+    background-color: #a3a3a3;
+    height: 800px;
+}
+.list-view-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.list-buttons-content {
+    height: 55px;
+    width: 100%;
+}
+.list-buttons-inner {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.list-buttons-element {
+    background: #288df0;
+    box-sizing: border-box;
+    border-radius: 50px;
+}
+.list-buttons-element-inner {
+    padding: 10px;
+}
