@@ -20,12 +20,12 @@ class ListView {
         return $this->_button;
     }
 
-    public function setHeader(array $header):void
+    public function addHeader(array $header):void
     {
-        $this->_header = $header;
+        $this->_header[] = $header;
     }
 
-    public function getHeader():array
+    public function getHeaders():array
     {
         return $this->_header;
     }
@@ -54,7 +54,7 @@ class ListView {
     {
         return [
             'buttons' => $this->getButtons(),
-            'header' => $this->getHeader(),
+            'headers' => $this->getHeaders(),
             'rows' => $this->getRows(),
             'paggination' => $this->getPaggination(),
         ];

@@ -241,11 +241,33 @@ a {
     flex-direction: row;
     justify-content: flex-end;
 }
-.list-buttons-element {
-    background: #288df0;
-    box-sizing: border-box;
-    border-radius: 50px;
+.list-add-button {
+    font-size: 32px;
+    color: #288df0;
 }
-.list-buttons-element-inner {
-    padding: 10px;
+.list-headers-content {
+    height: 50px;
+    max-width: 650px;
+}
+.list-headers-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+}
+.list-header-element-inner {
+    display: flex;
+    justify-content: center;
+}
+.list-headers-element .small {
+    width: 50px;
+}
+.list-headers-element .basic {
+    width: 150px;
+}
+.list-headers-element .large {
+    width: 300px;
+}
+.list-rows-content {
+    max-width: 650px;
 }

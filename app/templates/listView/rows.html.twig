@@ -1,18 +1,14 @@
 <div class="list-rows-content">
     <div class="list-rows-inner">
-        <div class="list-rows-element">
-            <div class="list-rows-element-inner">
-                <p>
-                    Dodaj
-                </p>
-            </div>
-        </div>
-        <div class="list-rows-element">
-            <div class="list-rows-element-inner">
-                <p>
-                    Zaznacz wszystko
-                </p>
-            </div>
-        </div>
+        {% if rows %}
+            {% for row in rows %}
+                <div class="list-rows-element">
+                    <div class="list-rows-element-inner">
+                        {% for element in row %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
 </div>
