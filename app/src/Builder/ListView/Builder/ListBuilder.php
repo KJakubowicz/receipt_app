@@ -15,7 +15,7 @@ abstract class ListBuilder {
 
     abstract public function addButton(): void;
 
-    abstract public function setHeader(): void;
+    abstract public function addHeaderElement(): void;
 
     abstract public function setRows(): void;
 
