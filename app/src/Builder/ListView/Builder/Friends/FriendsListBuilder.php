@@ -18,21 +18,46 @@ class FriendsListBuilder extends ListBuilder {
 
     public function setRows(array $rows = []): void
     {
-        $preparedRows = $this->prepareNumber($rows);
+        $preparedRows = $this->prepareRows($rows);
         $this->listView->setRows($preparedRows);
     }
 
-    private function prepareNumber(array $rows): array
+    private function prepareRows(array $rows): array
     {
+        $result = [];
+        
         if (!empty($rows)) {
-            $i = 1;
-            foreach ($rows as &$row) {
-                $row['NUMBER'] = $i;
+            $i = 0;
+            $rowNumber = 1;
+            foreach ($rows as $row) {
+                $temp = [];
+                $temp[] = [
+                    'type' => 'number',
+                    'value' => $rowNumber
+                ];
+                foreach ($row as $key => $value) {
+                    switch ($key) {
+                        case 'ID':
+                            $temp[] = [
+                                'type' => 'id',
+                                'value' => $value,
+                            ];
+                            break;
+                        default:
+                            $temp[] = [
+                                'type' => 'column',
+                                'value' => $value,
+                            ];
+                            break;
+                    }
+                }
+                $result[$i] = $temp;
+                $rowNumber++;
                 $i++;
             }
         }
 
-        return $rows;
+        return $result;
     }
 
     public function setPaggination(int $paggination = 0): void
