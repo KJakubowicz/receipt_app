@@ -11,14 +11,53 @@ class FriendsListBuilder extends ListBuilder {
         $this->listView->addButton($button);
     }
 
-    public function setHeader(array $header = []): void
+    public function addHeaderElement(array $header = []): void
     {
-        $this->listView->setHeader($header);
+        $this->listView->addHeader($header);
     }
 
     public function setRows(array $rows = []): void
     {
-        $this->listView->setRows($rows);
+        $preparedRows = $this->prepareRows($rows);
+        $this->listView->setRows($preparedRows);
+    }
+
+    private function prepareRows(array $rows): array
+    {
+        $result = [];
+        
+        if (!empty($rows)) {
+            $i = 0;
+            $rowNumber = 1;
+            foreach ($rows as $row) {
+                $temp = [];
+                $temp[] = [
+                    'type' => 'number',
+                    'value' => $rowNumber
+                ];
+                foreach ($row as $key => $value) {
+                    switch ($key) {
+                        case 'ID':
+                            $temp[] = [
+                                'type' => 'id',
+                                'value' => $value,
+                            ];
+                            break;
+                        default:
+                            $temp[] = [
+                                'type' => 'column',
+                                'value' => $value,
+                            ];
+                            break;
+                    }
+                }
+                $result[$i] = $temp;
+                $rowNumber++;
+                $i++;
+            }
+        }
+
+        return $result;
     }
 
     public function setPaggination(int $paggination = 0): void

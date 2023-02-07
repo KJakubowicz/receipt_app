@@ -223,7 +223,6 @@ a {
 }
 /* LISTVIEW */
 .list-view-content {
-    background-color: #a3a3a3;
     height: 800px;
 }
 .list-view-inner {
@@ -241,11 +240,65 @@ a {
     flex-direction: row;
     justify-content: flex-end;
 }
-.list-buttons-element {
-    background: #288df0;
-    box-sizing: border-box;
-    border-radius: 50px;
+.list-add-button {
+    font-size: 32px;
+    color: #288df0;
 }
-.list-buttons-element-inner {
-    padding: 10px;
+.list-headers-content {
+    height: 50px;
+    max-width: 650px;
+}
+.list-headers-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+}
+.list-header-element-inner {
+    display: flex;
+    justify-content: center;
+}
+.list-headers-element .small {
+    width: 50px;
+}
+.list-headers-element .basic {
+    width: 150px;
+}
+.list-headers-element .large {
+    width: 300px;
+}
+.list-rows-content {
+    max-width: 650px;
+}
+.list-rows-inner {
+    display: flex;
+    flex-direction: column;
+}
+.list-rows-element-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 50px;
+}
+.list-element {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.list-element.number {
+    width: 50px;
+}
+.list-element.column {
+    width: 150px;
+}
+.list-element.options {
+    width: 300px;
+}
+.list-view-data {
+    -webkit-box-shadow: 0px 0px 17px -9px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 0px 0px 17px -9px rgba(66, 68, 90, 1);
+    box-shadow: 0px 0px 17px -9px rgba(66, 68, 90, 1);
+}
+.list-rows-element:nth-child(odd) {
+    background-color: #f3f3f3;
 }
