@@ -6,9 +6,11 @@
     <div class="list-view-content">
         <div class="list-view-inner">
             {% include '/listView/buttons.html.twig' with {'buttons' : listView.buttons} %}
-            {% include '/listView/header.html.twig' with {'headers' : listView.headers } %}
-            {% include '/listView/rows.html.twig' with {'rows' : listView.rows} %}
-            {% include '/listView/paggination.html.twig' %}
+            <div class="list-view-data">
+                {% include '/listView/header.html.twig' with {'headers' : listView.headers } %}
+                {% include '/listView/rows.html.twig' with {'rows' : listView.rows} %}
+                {% include '/listView/paggination.html.twig' %}
+            </div>
         </div>
     </div>
 {% endblock %}

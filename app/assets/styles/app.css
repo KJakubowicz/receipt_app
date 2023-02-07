@@ -223,7 +223,6 @@ a {
 }
 /* LISTVIEW */
 .list-view-content {
-    background-color: #a3a3a3;
     height: 800px;
 }
 .list-view-inner {
@@ -270,4 +269,36 @@ a {
 }
 .list-rows-content {
     max-width: 650px;
+}
+.list-rows-inner {
+    display: flex;
+    flex-direction: column;
+}
+.list-rows-element-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 50px;
+}
+.list-element {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.list-element.number {
+    width: 50px;
+}
+.list-element.column {
+    width: 150px;
+}
+.list-element.options {
+    width: 300px;
+}
+.list-view-data {
+    -webkit-box-shadow: 0px 0px 17px -9px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 0px 0px 17px -9px rgba(66, 68, 90, 1);
+    box-shadow: 0px 0px 17px -9px rgba(66, 68, 90, 1);
+}
+.list-rows-element:nth-child(odd) {
+    background-color: #f3f3f3;
 }

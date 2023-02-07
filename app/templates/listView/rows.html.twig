@@ -5,6 +5,18 @@
                 <div class="list-rows-element">
                     <div class="list-rows-element-inner">
                         {% for element in row %}
+                            {% if element.type != 'id' %}
+                                <div class="list-element {{element.type}}">
+                                    {{element.value}}
+                                </div>
+                                {% if loop.last == true %}
+                                    <div class="list-element options">
+                                {{test}}
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                {% set test = element.value %}
+                            {% endif %}
                         {% endfor %}
                     </div>
                 </div>
