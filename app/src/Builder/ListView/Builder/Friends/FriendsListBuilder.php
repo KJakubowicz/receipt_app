@@ -36,10 +36,16 @@ class FriendsListBuilder extends ListBuilder {
                     'value' => $rowNumber
                 ];
                 foreach ($row as $key => $value) {
-                    switch ($key) {
-                        case 'ID':
+                    switch (strtolower($key)) {
+                        case 'id':
                             $temp[] = [
                                 'type' => 'id',
+                                'value' => $value,
+                            ];
+                            break;
+                        case 'id_owner':
+                            $temp[] = [
+                                'type' => 'id_owner',
                                 'value' => $value,
                             ];
                             break;

@@ -12,8 +12,6 @@ class FriendsController extends AbstractController
 {
     public function list(FriendsRepository $friendsRepository): Response
     {
-
-        dd($friendsRepository->findByUserId($this->getUser()->getId()));
         $listBuilder = new FriendsListBuilder();
         $listBuilder->addButton([
             'type' => 'add',
@@ -47,23 +45,7 @@ class FriendsController extends AbstractController
                 'text' => 'Opcje'
             ],
         );
-        $rows = [
-            0 => [
-                'ID' => 1,
-                'NAME' => 'Test1',
-                'SURNAME' => 'Test1',
-            ],
-            1 => [
-                'ID' => 2,
-                'NAME' => 'Test2',
-                'SURNAME' => 'Test2',
-            ],
-            2 => [
-                'ID' => 3,
-                'NAME' => 'Test3',
-                'SURNAME' => 'Test3',
-            ],
-        ];
+        $rows = $friendsRepository->findByUserId($this->getUser()->getId());
         $listBuilder->setRows($rows);
         $listBuilder->setPaggination(0);
         $listView = new ListMaker($listBuilder);
