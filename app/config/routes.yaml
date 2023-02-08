@@ -18,6 +18,9 @@ app_register:
 app_friends_list:
     path: /friends
     controller: App\Controller\FriendsController::list
+app_friend_add:
+    path: /friend/add
+    controller: App\Controller\FriendsController::add
 app_friend_remove:
     path: /friend/remove/{id}
     controller: App\Controller\FriendsController::remove

@@ -8,6 +8,8 @@ use App\Builder\ListView\Maker\ListMaker;
 use App\Builder\ListView\Builder\Friends\FriendsListBuilder;
 use App\Repository\FriendsRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Form\FriendsAddFormType;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * FriendsController
@@ -92,16 +94,37 @@ class FriendsController extends AbstractController
             'breadcrumbs' => [
                 [
                     'name' => 'Znajomi',
+                    'href' => '#'
+                ]
+            ],
+        ]);
+    }
+        
+    /**
+     * add
+     *
+     * @return Response
+     */
+    public function add(Request $request): Response
+    {
+        $form = $this->createForm(FriendsAddFormType::class);
+        $form->handleRequest($request);
+
+        return $this->render('friends/add.html.twig', [
+            'form' => $form->createView(),
+            'breadcrumbs' => [
+                [
+                    'name' => 'Znajomi',
                     'href' => '/friends'
                 ],
                 [
                     'name' => 'Dodaj znajomego',
-                    'href' => '/friend/add'
+                    'href' => '#'
                 ],
             ],
         ]);
     }
-    
+
     /**
      * remove
      *
