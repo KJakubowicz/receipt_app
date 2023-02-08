@@ -8,9 +8,32 @@ use App\Builder\ListView\Maker\ListMaker;
 use App\Builder\ListView\Builder\Friends\FriendsListBuilder;
 use App\Repository\FriendsRepository;
 
+/**
+ * FriendsController
+ */
 class FriendsController extends AbstractController
 {
-    public function list(FriendsRepository $friendsRepository): Response
+    
+    private FriendsRepository $_repository;
+    
+    /**
+     * __construct
+     *
+     * @param  mixed $friendsRepository
+     * @return void
+     */
+    public function __construct(FriendsRepository $friendsRepository)
+    {
+        $this->_repository = $friendsRepository;
+    }
+
+    /**
+     * list
+     *
+     * @param  mixed $friendsRepository
+     * @return Response
+     */
+    public function list(): Response
     {
         $listBuilder = new FriendsListBuilder();
         $listBuilder->addButton([
@@ -45,7 +68,7 @@ class FriendsController extends AbstractController
                 'text' => 'Opcje'
             ],
         );
-        $rows = $friendsRepository->findByUserId($this->getUser()->getId());
+        $rows = $this->_repository->findByUserId($this->getUser()->getId());
         $listBuilder->setRows($rows);
         $listBuilder->setPaggination(0);
         $listView = new ListMaker($listBuilder);
@@ -64,5 +87,10 @@ class FriendsController extends AbstractController
                 ],
             ],
         ]);
+    }
+
+    private function remove($id): void
+    {
+
     }
 }

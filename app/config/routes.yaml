@@ -18,6 +18,9 @@ app_register:
 app_friends:
     path: /friends
     controller: App\Controller\FriendsController::list
+app_remove_friend:
+    path: /friends/remove/{id}
+    controller: App\Controller\FriendsController::remove
 # PAYMENTS
 app_payments:
     path: /payments
