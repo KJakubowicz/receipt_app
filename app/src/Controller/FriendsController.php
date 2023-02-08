@@ -10,8 +10,8 @@ use App\Repository\FriendsRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Form\FriendsAddFormType;
-use App\Helper\FriendsHelper;
 use Symfony\Component\HttpFoundation\Request;
+use App\Helper\FriendsHelper;
 
 /**
  * FriendsController
@@ -39,12 +39,6 @@ class FriendsController extends AbstractController
      */
     private EntityManagerInterface $_em;
         
-    /**
-     * Interface EntityManagerInterface.
-     *
-     * @var FriendsHelper
-     */
-    private FriendsHelper $_helper;
         
     /**
      * __construct
@@ -54,12 +48,11 @@ class FriendsController extends AbstractController
      * @param  mixed $em
      * @return void
      */
-    public function __construct(FriendsRepository $friendsRepository, UserRepository $userRepository, EntityManagerInterface $em, FriendsHelper $helper)
+    public function __construct(FriendsRepository $friendsRepository, UserRepository $userRepository, EntityManagerInterface $em)
     {
         $this->_repository = $friendsRepository;
         $this->_userRepository = $userRepository;
         $this->_em = $em;
-        $this->_helper = $helper;
     }
     
     /**
@@ -126,7 +119,9 @@ class FriendsController extends AbstractController
      */
     public function add(Request $request): Response
     {
-        $choices = $this->_userRepository->findUsersForChoises($this->getUser()->getId());
+        $choices = FriendsHelper::getChoisesForForm(
+            $this->_userRepository->findUsersForChoises($this->getUser()->getId())
+        );
         $form = $this->createForm(FriendsAddFormType::class,null,[
             'choices' => $choices,
         ]);

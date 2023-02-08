@@ -12,18 +12,11 @@ class FriendsAddFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {   
-        dd($options['choices']);
         $builder
             ->add(
                 'email',
                 ChoiceType::class,
-                [
-                    'choices'  => [
-                        'Maybe' => 3,
-                        'Yes' => 4,
-                        'No' => 5,
-                    ],
-                ]
+                $options['choices']
             )
         ;
     }
