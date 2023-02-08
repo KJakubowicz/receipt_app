@@ -7,8 +7,10 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Builder\ListView\Maker\ListMaker;
 use App\Builder\ListView\Builder\Friends\FriendsListBuilder;
 use App\Repository\FriendsRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Form\FriendsAddFormType;
+use App\Helper\FriendsHelper;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -24,6 +26,13 @@ class FriendsController extends AbstractController
     private FriendsRepository $_repository;
 
     /**
+     * Class UserRepository.
+     *
+     * @var UserRepository
+     */
+    private UserRepository $_userRepository;
+
+    /**
      * Interface EntityManagerInterface.
      *
      * @var EntityManagerInterface
@@ -31,16 +40,26 @@ class FriendsController extends AbstractController
     private EntityManagerInterface $_em;
         
     /**
+     * Interface EntityManagerInterface.
+     *
+     * @var FriendsHelper
+     */
+    private FriendsHelper $_helper;
+        
+    /**
      * __construct
      *
      * @param  mixed $friendsRepository
+     * @param  mixed $userRepository
      * @param  mixed $em
      * @return void
      */
-    public function __construct(FriendsRepository $friendsRepository, EntityManagerInterface $em)
+    public function __construct(FriendsRepository $friendsRepository, UserRepository $userRepository, EntityManagerInterface $em, FriendsHelper $helper)
     {
         $this->_repository = $friendsRepository;
+        $this->_userRepository = $userRepository;
         $this->_em = $em;
+        $this->_helper = $helper;
     }
     
     /**
@@ -107,7 +126,10 @@ class FriendsController extends AbstractController
      */
     public function add(Request $request): Response
     {
-        $form = $this->createForm(FriendsAddFormType::class);
+        $choices = $this->_userRepository->findUsersForChoises($this->getUser()->getId());
+        $form = $this->createForm(FriendsAddFormType::class,null,[
+            'choices' => $choices,
+        ]);
         $form->handleRequest($request);
 
         return $this->render('friends/add.html.twig', [

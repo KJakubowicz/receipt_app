@@ -6,17 +6,25 @@ use App\Entity\Friends;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class FriendsAddFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    {   
+        dd($options['choices']);
         $builder
-            ->add('id_owner')
-            ->add('id_user')
-            ->add('confirmed')
-            ->add('created_at')
-            ->add('last_modification')
+            ->add(
+                'email',
+                ChoiceType::class,
+                [
+                    'choices'  => [
+                        'Maybe' => 3,
+                        'Yes' => 4,
+                        'No' => 5,
+                    ],
+                ]
+            )
         ;
     }
 
@@ -24,6 +32,7 @@ class FriendsAddFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Friends::class,
+            'choices' => [],
         ]);
     }
 }
