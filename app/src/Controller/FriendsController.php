@@ -6,11 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use App\Builder\ListView\Maker\ListMaker;
 use App\Builder\ListView\Builder\Friends\FriendsListBuilder;
+use App\Repository\FriendsRepository;
 
 class FriendsController extends AbstractController
 {
-    public function list(): Response
+    public function list(FriendsRepository $friendsRepository): Response
     {
+
+        dd($friendsRepository->findByUserId($this->getUser()->getId()));
         $listBuilder = new FriendsListBuilder();
         $listBuilder->addButton([
             'type' => 'add',
