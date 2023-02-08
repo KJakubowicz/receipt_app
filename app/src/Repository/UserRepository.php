@@ -80,6 +80,21 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->save($user, true);
     }
 
+    public function findUsersForChoises($id): array
+    {
+        $query = $this->getEntityManager()->createQuery('
+            Select u.id, u.name, u.surname
+            From App\Entity\User u
+            Where u.id != :id
+            AND u.id NOT IN (
+                Select f.id_user
+                From App\Entity\Friends f
+                Where f.id_owner = :id
+            )
+        ')->setParameter('id', $id);
+
+        return $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+    }
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */
