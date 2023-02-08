@@ -7,30 +7,43 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Builder\ListView\Maker\ListMaker;
 use App\Builder\ListView\Builder\Friends\FriendsListBuilder;
 use App\Repository\FriendsRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * FriendsController
  */
 class FriendsController extends AbstractController
 {
-    
+    /**
+     * Class FriendsRepository.
+     *
+     * @var FriendsRepository
+     */
     private FriendsRepository $_repository;
-    
+
+    /**
+     * Interface EntityManagerInterface.
+     *
+     * @var EntityManagerInterface
+     */
+    private EntityManagerInterface $_em;
+        
     /**
      * __construct
      *
      * @param  mixed $friendsRepository
+     * @param  mixed $em
      * @return void
      */
-    public function __construct(FriendsRepository $friendsRepository)
+    public function __construct(FriendsRepository $friendsRepository, EntityManagerInterface $em)
     {
         $this->_repository = $friendsRepository;
+        $this->_em = $em;
     }
-
+    
     /**
      * list
      *
-     * @param  mixed $friendsRepository
      * @return Response
      */
     public function list(): Response
@@ -88,9 +101,20 @@ class FriendsController extends AbstractController
             ],
         ]);
     }
-
-    private function remove($id): void
+    
+    /**
+     * remove
+     *
+     * @param  mixed $id
+     * @return Response
+     */
+    public function remove($id): Response
     {
+        $friend = $this->_repository->find($id);
 
+        $this->_em->remove($friend);
+        $this->_em->flush();
+
+        return $this->redirectToRoute('app_friends_list');
     }
 }

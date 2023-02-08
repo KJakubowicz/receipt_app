@@ -15,11 +15,11 @@ app_register:
     path: /register
     controller: App\Controller\RegistrationController::register
 # FRIENDS
-app_friends:
+app_friends_list:
     path: /friends
     controller: App\Controller\FriendsController::list
-app_remove_friend:
-    path: /friends/remove/{id}
+app_friend_remove:
+    path: /friend/remove/{id}
     controller: App\Controller\FriendsController::remove
 # PAYMENTS
 app_payments:
