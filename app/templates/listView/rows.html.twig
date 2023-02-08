@@ -11,11 +11,13 @@
                                 </div>
                                 {% if loop.last == true %}
                                     <div class="list-element options">
-                                {{test}}
+                                        <a href="/friend/remove/{{id_friend}}" class="red-label hover">
+                                            <i class="fa-regular fa-square-minus"></i>
+                                        </a>
                                     </div>
                                 {% endif %}
                             {% else %}
-                                {% set test = element.value %}
+                                {% set id_friend = element.value %}
                             {% endif %}
                         {% endfor %}
                     </div>

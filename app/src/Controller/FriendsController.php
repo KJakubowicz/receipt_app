@@ -6,9 +6,60 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use App\Builder\ListView\Maker\ListMaker;
 use App\Builder\ListView\Builder\Friends\FriendsListBuilder;
+use App\Repository\FriendsRepository;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Form\FriendsAddFormType;
+use Symfony\Component\HttpFoundation\Request;
+use App\Helper\FriendsHelper;
 
+/**
+ * FriendsController
+ */
 class FriendsController extends AbstractController
 {
+    /**
+     * Class FriendsRepository.
+     *
+     * @var FriendsRepository
+     */
+    private FriendsRepository $_repository;
+
+    /**
+     * Class UserRepository.
+     *
+     * @var UserRepository
+     */
+    private UserRepository $_userRepository;
+
+    /**
+     * Interface EntityManagerInterface.
+     *
+     * @var EntityManagerInterface
+     */
+    private EntityManagerInterface $_em;
+        
+        
+    /**
+     * __construct
+     *
+     * @param  mixed $friendsRepository
+     * @param  mixed $userRepository
+     * @param  mixed $em
+     * @return void
+     */
+    public function __construct(FriendsRepository $friendsRepository, UserRepository $userRepository, EntityManagerInterface $em)
+    {
+        $this->_repository = $friendsRepository;
+        $this->_userRepository = $userRepository;
+        $this->_em = $em;
+    }
+    
+    /**
+     * list
+     *
+     * @return Response
+     */
     public function list(): Response
     {
         $listBuilder = new FriendsListBuilder();
@@ -44,23 +95,7 @@ class FriendsController extends AbstractController
                 'text' => 'Opcje'
             ],
         );
-        $rows = [
-            0 => [
-                'ID' => 1,
-                'NAME' => 'Test1',
-                'SURNAME' => 'Test1',
-            ],
-            1 => [
-                'ID' => 2,
-                'NAME' => 'Test2',
-                'SURNAME' => 'Test2',
-            ],
-            2 => [
-                'ID' => 3,
-                'NAME' => 'Test3',
-                'SURNAME' => 'Test3',
-            ],
-        ];
+        $rows = $this->_repository->findByUserId($this->getUser()->getId());
         $listBuilder->setRows($rows);
         $listBuilder->setPaggination(0);
         $listView = new ListMaker($listBuilder);
@@ -71,13 +106,55 @@ class FriendsController extends AbstractController
             'breadcrumbs' => [
                 [
                     'name' => 'Znajomi',
+                    'href' => '#'
+                ]
+            ],
+        ]);
+    }
+        
+    /**
+     * add
+     *
+     * @return Response
+     */
+    public function add(Request $request): Response
+    {
+        $choices = FriendsHelper::getChoisesForForm(
+            $this->_userRepository->findUsersForChoises($this->getUser()->getId())
+        );
+        $form = $this->createForm(FriendsAddFormType::class,null,[
+            'choices' => $choices,
+        ]);
+        $form->handleRequest($request);
+
+        return $this->render('friends/add.html.twig', [
+            'form' => $form->createView(),
+            'breadcrumbs' => [
+                [
+                    'name' => 'Znajomi',
                     'href' => '/friends'
                 ],
                 [
                     'name' => 'Dodaj znajomego',
-                    'href' => '/friend/add'
+                    'href' => '#'
                 ],
             ],
         ]);
+    }
+
+    /**
+     * remove
+     *
+     * @param  mixed $id
+     * @return Response
+     */
+    public function remove($id): Response
+    {
+        $friend = $this->_repository->find($id);
+
+        $this->_em->remove($friend);
+        $this->_em->flush();
+
+        return $this->redirectToRoute('app_friends_list');
     }
 }
