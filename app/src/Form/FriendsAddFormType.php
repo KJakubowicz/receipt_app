@@ -7,16 +7,38 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class FriendsAddFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
-    {   
+    {
         $builder
             ->add(
-                'email',
+                'id_user',
                 ChoiceType::class,
-                $options['choices']
+                [
+                    'choices' => $options['choices'],
+                    'label' => 'Wybierz znajomego',
+                    'empty_data' => 'John Doe',
+                    'required' => true,
+                    'row_attr' => [
+                        'class' => 'select-box',
+                    ],
+                ]
+            )
+            ->add(
+                'save',
+                SubmitType::class,
+                [
+                    'row_attr' => [
+                        'class' => 'submit-box',
+                    ],
+                    'label' => 'Dodaj znajomego',
+                    'attr' => [
+                        'class' => 'submit-button hover'
+                    ]
+                ]
             )
         ;
     }

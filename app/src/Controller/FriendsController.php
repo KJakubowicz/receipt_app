@@ -122,10 +122,21 @@ class FriendsController extends AbstractController
         $choices = FriendsHelper::getChoisesForForm(
             $this->_userRepository->findUsersForChoises($this->getUser()->getId())
         );
-        $form = $this->createForm(FriendsAddFormType::class,null,[
-            'choices' => $choices,
-        ]);
+        $form = $this->createForm(FriendsAddFormType::class,null,['choices' => $choices]);
         $form->handleRequest($request);
+
+        if ($form->isSubmitted() === true && $form->isValid() === true) {
+            $newFriend = $form->getData();
+            $dataTime = new \DateTimeImmutable();
+         
+            $newFriend->setCreatedAt($dataTime);
+            $newFriend->setIdOwner($this->getUser()->getId());
+            $newFriend->setConfirmed(false);
+            $this->_em->persist($newFriend);
+            $this->_em->flush();
+
+            return $this->redirectToRoute('app_friends_list');
+        }//end if
 
         return $this->render('friends/add.html.twig', [
             'form' => $form->createView(),
