@@ -11,12 +11,17 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 class FriendsAddFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
-    {   
+    {
         $builder
             ->add(
-                'email',
+                'id_user',
                 ChoiceType::class,
-                $options['choices']
+                [
+                    'choices' => $options['choices'],
+                    'label' => false,
+
+                ]
+
             )
         ;
     }

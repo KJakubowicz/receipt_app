@@ -18,7 +18,7 @@ class FriendsHelper
         $result = [];
         foreach ($choises as $choise) {
             $tempName = $choise['name'].' '.$choise['surname'];
-            $result['choices'][$tempName] = $choise['id'];
+            $result[$tempName] = $choise['id'];
         }
 
         return $result;
