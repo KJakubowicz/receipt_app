@@ -7,15 +7,18 @@ namespace App\Helper;
  */
 class FriendsHelper
 {    
+        
     /**
      * getChoisesForForm
      *
      * @param  mixed $choises
+     * @param  mixed $emptyValue
      * @return array
      */
-    public static function getChoisesForForm(array $choises):array
+    public static function getChoisesForForm(array $choises, bool $emptyValue = true):array
     {
-        $result = [];
+        $result = ($emptyValue) ? ['--Wybierz--' => null] : [];
+
         foreach ($choises as $choise) {
             $tempName = $choise['name'].' '.$choise['surname'];
             $result[$tempName] = $choise['id'];

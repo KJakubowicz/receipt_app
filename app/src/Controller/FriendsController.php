@@ -119,12 +119,11 @@ class FriendsController extends AbstractController
      */
     public function add(Request $request): Response
     {
+        dd($request);
         $choices = FriendsHelper::getChoisesForForm(
             $this->_userRepository->findUsersForChoises($this->getUser()->getId())
         );
-        $form = $this->createForm(FriendsAddFormType::class,null,[
-            'choices' => $choices,
-        ]);
+        $form = $this->createForm(FriendsAddFormType::class,null,['choices' => $choices]);
         $form->handleRequest($request);
 
         return $this->render('friends/add.html.twig', [
