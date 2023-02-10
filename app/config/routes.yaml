@@ -28,3 +28,7 @@ app_friend_remove:
 app_payments:
     path: /payments
     controller: App\Controller\PaymentsController::index
+# NOTIFIACTION
+app_notification_list:
+    path: /notifications
+    controller: App\Controller\NotificationsController::list

@@ -17,7 +17,7 @@ class FriendsHelper
      */
     public static function getChoisesForForm(array $choises, bool $emptyValue = true):array
     {
-        $result = ($emptyValue) ? ['--Wybierz--' => null] : [];
+        $result = ($emptyValue) ? ['--Wybierz--' => ''] : [];
 
         foreach ($choises as $choise) {
             $tempName = $choise['name'].' '.$choise['surname'];
