@@ -48,9 +48,9 @@ class FriendsRepository extends ServiceEntityRepository
             With u.id = f.id_user
             Where f.id_owner = :id
             And f.confirmed = :confirmed
-        ')->setParameter('id', $id)
+        ')
+        ->setParameter('id', $id)
         ->setParameter('confirmed', 1);
-;
 
         return $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
     }
