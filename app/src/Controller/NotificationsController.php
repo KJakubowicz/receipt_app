@@ -8,6 +8,8 @@ use App\Builder\ListView\Maker\ListMaker;
 use App\Builder\ListView\Builder\Notifications\NotificationsListBuilder;
 use App\Repository\NotificationsRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Notifications;
+use Doctrine\Persistence\ManagerRegistry;
 
 class NotificationsController extends AbstractController
 {
@@ -82,5 +84,16 @@ class NotificationsController extends AbstractController
             'listView' => $listView->makeList(),
             'controller_name' => 'NotificationController',
         ]);
+    }
+
+    public static function send(int $from, int $to, string $type, string $content): void
+    {
+        $entity = new Notifications();
+        $repository = new NotificationsRepository(new ManagerRegistry);
+        $entity->setIdUser($from);
+        $entity->setIdOwner($to);
+        $entity->setType($type);
+        $entity->setContent($content);
+        $repository->save($entity, true);
     }
 }

@@ -25,6 +25,9 @@ class Notifications
     #[ORM\Column]
     private ?bool $readed = null;
 
+    #[ORM\Column]
+    private ?int $id_user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,18 @@ class Notifications
     public function setReaded(bool $readed): self
     {
         $this->readed = $readed;
+
+        return $this;
+    }
+
+    public function getIdUser(): ?int
+    {
+        return $this->id_user;
+    }
+
+    public function setIdUser(int $id_user): self
+    {
+        $this->id_user = $id_user;
 
         return $this;
     }

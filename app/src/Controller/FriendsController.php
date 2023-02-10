@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Form\FriendsAddFormType;
 use Symfony\Component\HttpFoundation\Request;
 use App\Helper\FriendsHelper;
+use App\Controller\NotificationsController;
 
 /**
  * FriendsController
@@ -128,12 +129,17 @@ class FriendsController extends AbstractController
         if ($form->isSubmitted() === true && $form->isValid() === true) {
             $newFriend = $form->getData();
             $dataTime = new \DateTimeImmutable();
-         
+
             $newFriend->setCreatedAt($dataTime);
             $newFriend->setIdOwner($this->getUser()->getId());
             $newFriend->setConfirmed(false);
+
+            NotificationsController::send($newFriend->getIdOwner(), $newFriend->getIdUser(), 'FRIENDS','Nowe zaproszenie do znajomych');
+            die;
             $this->_em->persist($newFriend);
             $this->_em->flush();
+            
+           
 
             return $this->redirectToRoute('app_friends_list');
         }//end if
