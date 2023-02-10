@@ -6,9 +6,39 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use App\Builder\ListView\Maker\ListMaker;
 use App\Builder\ListView\Builder\Notifications\NotificationsListBuilder;
+use App\Repository\NotificationsRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 class NotificationsController extends AbstractController
 {
+     /**
+     * Class NotificationsRepository.
+     *
+     * @var NotificationsRepository
+     */
+    private NotificationsRepository $_repository;
+
+    /**
+     * Interface EntityManagerInterface.
+     *
+     * @var EntityManagerInterface
+     */
+    private EntityManagerInterface $_em;
+
+    /**
+     * __construct
+     *
+     * @param  mixed $NotificationsRepository
+     * @param  mixed $userRepository
+     * @param  mixed $em
+     * @return void
+     */
+    public function __construct(NotificationsRepository $NotificationsRepository, EntityManagerInterface $em)
+    {
+        $this->_repository = $NotificationsRepository;
+        $this->_em = $em;
+    }
+
     public function list(): Response
     {
         $listBuilder = new NotificationsListBuilder();
