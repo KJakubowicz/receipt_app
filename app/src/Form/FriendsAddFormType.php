@@ -20,7 +20,6 @@ class FriendsAddFormType extends AbstractType
                 [
                     'choices' => $options['choices'],
                     'label' => 'Wybierz znajomego',
-                    'empty_data' => 'John Doe',
                     'required' => true,
                     'row_attr' => [
                         'class' => 'select-box',
