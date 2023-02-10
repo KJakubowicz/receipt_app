@@ -5,14 +5,16 @@ namespace App\Builder\ListView\List;
 
 class ListView {
 
-    private array $_button;
-    private array $_header;
+    private array $_button = [];
+    private array $_header = [];
     private array $_rows;
     private int $_paggination;
 
     public function addButton(array $button):void
-    {
-        $this->_button[] = $button;
+    { 
+        if (!empty($button)) {
+            $this->_button[] = $button;
+        }
     }
 
     public function getButtons():array
@@ -22,7 +24,9 @@ class ListView {
 
     public function addHeader(array $header):void
     {
-        $this->_header[] = $header;
+        if (!empty($header)) {
+            $this->_header[] = $header;
+        }
     }
 
     public function getHeaders():array

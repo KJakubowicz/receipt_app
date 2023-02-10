@@ -282,7 +282,6 @@ a {
 }
 .list-headers-content {
     height: 50px;
-    max-width: 650px;
 }
 .list-headers-inner {
     display: flex;
