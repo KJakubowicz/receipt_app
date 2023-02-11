@@ -70,6 +70,9 @@ body {
 .red-label {
     color: red;
 }
+.green-label {
+    color: green;
+}
 a {
     text-decoration: none;
     color: black;
@@ -302,9 +305,6 @@ a {
 .list-headers-element .large {
     width: 300px;
 }
-.list-rows-content {
-    max-width: 650px;
-}
 .list-rows-inner {
     display: flex;
     flex-direction: column;
@@ -315,19 +315,30 @@ a {
     align-items: center;
     height: 50px;
 }
-.list-element {
+.list-element-inner {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.list-element.number {
+.list-element-inner.number {
     width: 50px;
 }
-.list-element.column {
+.list-element-inner.column {
     width: 150px;
 }
-.list-element.options {
+.list-element-inner.column-xl {
     width: 300px;
+}
+.list-element-inner.options {
+    width: 300px;
+}
+.list-element-inner .options-basic {
+    width: 150px;
+    justify-content: space-around;
+}
+.list-element-inner.options-basic {
+    width: 150px;
+    justify-content: space-around;
 }
 .list-view-data {
     -webkit-box-shadow: 0px 0px 17px -9px rgba(66, 68, 90, 1);

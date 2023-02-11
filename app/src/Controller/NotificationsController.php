@@ -59,17 +59,31 @@ class NotificationsController extends AbstractController
         );
         $listBuilder->addHeaderElement(
             [
-                'class' => 'basic',
+                'class' => 'large',
                 'text' => 'Treść'
             ],
         );
         $listBuilder->addHeaderElement(
             [
-                'class' => 'large',
+                'class' => 'basic',
+                'text' => 'Imię'
+            ],
+        );
+        $listBuilder->addHeaderElement(
+            [
+                'class' => 'basic',
+                'text' => 'Nazwisko'
+            ],
+        );
+        $listBuilder->addHeaderElement(
+            [
+                'class' => 'basic',
                 'text' => 'Opcje'
             ],
         );
-        $rows = [];
+
+        $rows = $this->_repository->findByUserId($this->getUser()->getId());
+
         $listBuilder->setRows($rows);
         $listBuilder->setPaggination(0);
         $listView = new ListMaker($listBuilder);

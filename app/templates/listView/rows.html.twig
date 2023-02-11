@@ -5,7 +5,22 @@
                 <div class="list-rows-element">
                     <div class="list-rows-element-inner">
                         {% for element in row %}
-                            {% if element.type != 'id' %}
+                        {% if element.type != 'data' %}
+                            {% if  element.type == 'options' %}
+                                <div class="list-element">
+                                    <div class="list-element-inner {{element.class}}">
+                                        {% include '/listView/options.html.twig' with {'options' : element.value } %}
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="list-element">
+                                    <div class="list-element-inner {{element.type}}">
+                                        {{element.value}}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                            {# {% if element.type != 'id' or element.type != 'data' %}
                                 <div class="list-element {{element.type}}">
                                     {{element.value}}
                                 </div>
@@ -13,12 +28,12 @@
                                     <div class="list-element options">
                                         <a href="/friend/remove/{{id_friend}}" class="red-label hover">
                                             <i class="fa-regular fa-square-minus"></i>
-                                        </a>
+                                        </a> 
                                     </div>
                                 {% endif %}
                             {% else %}
                                 {% set id_friend = element.value %}
-                            {% endif %}
+                            {% endif %} #}
                         {% endfor %}
                     </div>
                 </div>
