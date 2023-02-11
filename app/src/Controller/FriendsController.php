@@ -13,6 +13,7 @@ use App\Form\FriendsAddFormType;
 use Symfony\Component\HttpFoundation\Request;
 use App\Helper\FriendsHelper;
 use App\Controller\NotificationsController;
+use DateTimeImmutable;
 
 /**
  * FriendsController
@@ -133,13 +134,16 @@ class FriendsController extends AbstractController
             $newFriend->setCreatedAt($dataTime);
             $newFriend->setIdOwner($this->getUser()->getId());
             $newFriend->setConfirmed(false);
+            
+            $this->forward('App\Controller\NotificationsController::add', [
+                'from' => $newFriend->getIdOwner(),
+                'to' => $newFriend->getIdUser(),
+                'type' => 'NEW_FRIENDS',
+                'content' => 'Nowe zaproszenie do znajomych'
+            ]);
 
-            NotificationsController::send($newFriend->getIdOwner(), $newFriend->getIdUser(), 'FRIENDS','Nowe zaproszenie do znajomych');
-            die;
             $this->_em->persist($newFriend);
             $this->_em->flush();
-            
-           
 
             return $this->redirectToRoute('app_friends_list');
         }//end if
@@ -170,6 +174,24 @@ class FriendsController extends AbstractController
         $friend = $this->_repository->find($id);
 
         $this->_em->remove($friend);
+        $this->_em->flush();
+
+        return $this->redirectToRoute('app_friends_list');
+    }
+    
+    /**
+     * accept
+     *
+     * @param  mixed $id
+     * @return Response
+     */
+    public function accept($id): Response
+    {
+        $date = new DateTimeImmutable();
+        $friend = $this->_repository->findFriendById($id, $this->getUser()->getId());
+        $friend->setConfirmed(true);
+        $friend->setLastModification($date);
+        $this->_em->persist($friend);
         $this->_em->flush();
 
         return $this->redirectToRoute('app_friends_list');

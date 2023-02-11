@@ -41,18 +41,41 @@ class FriendsRepository extends ServiceEntityRepository
 
     public function findByUserId($id): array
     {
-        $query = $this->getEntityManager()->createQuery('
-            Select f.id, u.name, u.surname
+        $query = $this->getEntityManager()->createQuery("
+            Select 
+                f.id,
+                case when u2.name = '' then u.name else u2.name end name,
+                case when u2.surname = '' then u.surname else u2.surname end surname
             From App\Entity\Friends f
             Left join App\Entity\User u 
-            With u.id = f.id_user
-            Where f.id_owner = :id
-            And f.confirmed = :confirmed
-        ')
+                With u.id = f.id_user
+                And u.id != :id
+            Left join App\Entity\User u2
+                With u2.id = f.id_owner
+                And u2.id != :id
+            Where 
+                f.id_owner = :id OR
+                f.id_user = :id AND
+                f.confirmed = :confirmed
+        ")
         ->setParameter('id', $id)
         ->setParameter('confirmed', 1);
 
         return $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+    }
+
+    public function findFriendById($id, $id_user): Friends
+    {
+        $query = $this->getEntityManager()->createQuery('
+            Select f
+            From App\Entity\Friends f
+            Where f.id_owner = :id
+            And f.id_user = :id_user
+        ')
+        ->setParameter('id', $id)
+        ->setParameter('id_user', $id_user);
+
+        return $query->getSingleResult();
     }
 //    /**
 //     * @return Friends[] Returns an array of Friends objects

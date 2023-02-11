@@ -25,7 +25,7 @@ class NotificationsListBuilder extends ListBuilder {
     private function prepareRows(array $rows): array
     {
         $result = [];
-        
+           //dd($rows);
         if (!empty($rows)) {
             $i = 0;
             $rowNumber = 1;
@@ -37,15 +37,24 @@ class NotificationsListBuilder extends ListBuilder {
                 ];
                 foreach ($row as $key => $value) {
                     switch (strtolower($key)) {
-                        case 'id':
-                            $temp[] = [
-                                'type' => 'id',
-                                'value' => $value,
-                            ];
-                            break;
                         case 'id_owner':
                             $temp[] = [
                                 'type' => 'id_owner',
+                                'value' => $value,
+                            ];
+                            break;
+                        case 'readed':
+                        case 'id_user':
+                        case 'id':
+                                $temp[] = [
+                                    'type' => 'data',
+                                    'value' => $value,
+                                ];
+                                break;
+                        case 'type':
+                        case 'content':
+                            $temp[] = [
+                                'type' => 'column-xl',
                                 'value' => $value,
                             ];
                             break;
@@ -57,12 +66,32 @@ class NotificationsListBuilder extends ListBuilder {
                             break;
                     }
                 }
+                $temp[] = [
+                    'type' => 'options',
+                    'class' => 'options-basic',
+                    'value' => [
+                        [
+                            'href' => '/friend/accept/'.$row['id_user'],
+                            'label' => 'Akceptuj',
+                            'type' => 'accept green-label',
+                        ],
+                        [
+                            'href' => '/friend/decline/'.$row['id_user'],
+                            'label' => 'Odrzuć',
+                            'type' => 'decline',
+                        ],
+                        [
+                            'href' => '/notification/remove/'.$row['id'],
+                            'icon' => 'fa-regular fa-square-minus',
+                            'type' => 'remove red-label',
+                        ]
+                    ]
+                ];
                 $result[$i] = $temp;
                 $rowNumber++;
                 $i++;
             }
         }
-
         return $result;
     }
 

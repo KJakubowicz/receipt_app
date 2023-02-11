@@ -59,17 +59,31 @@ class NotificationsController extends AbstractController
         );
         $listBuilder->addHeaderElement(
             [
-                'class' => 'basic',
+                'class' => 'large',
                 'text' => 'Treść'
             ],
         );
         $listBuilder->addHeaderElement(
             [
-                'class' => 'large',
+                'class' => 'basic',
+                'text' => 'Imię'
+            ],
+        );
+        $listBuilder->addHeaderElement(
+            [
+                'class' => 'basic',
+                'text' => 'Nazwisko'
+            ],
+        );
+        $listBuilder->addHeaderElement(
+            [
+                'class' => 'basic',
                 'text' => 'Opcje'
             ],
         );
-        $rows = [];
+
+        $rows = $this->_repository->findByUserId($this->getUser()->getId());
+
         $listBuilder->setRows($rows);
         $listBuilder->setPaggination(0);
         $listView = new ListMaker($listBuilder);
@@ -85,15 +99,26 @@ class NotificationsController extends AbstractController
             'controller_name' => 'NotificationController',
         ]);
     }
-
-    public static function send(int $from, int $to, string $type, string $content): void
+    
+    /**
+     * add
+     *
+     * @param  mixed $from
+     * @param  mixed $to
+     * @param  mixed $type
+     * @param  mixed $content
+     * @return void
+     */
+    public function add(int $from, int $to, string $type, string $content): void
     {
-        $entity = new Notifications();
-        $repository = new NotificationsRepository(new ManagerRegistry);
-        $entity->setIdUser($from);
-        $entity->setIdOwner($to);
-        $entity->setType($type);
-        $entity->setContent($content);
-        $repository->save($entity, true);
+        $notification = new Notifications();
+        $notification->setIdUser($from);
+        $notification->setIdOwner($to);
+        $notification->setType($type);
+        $notification->setContent($content);
+        $notification->setReaded(false);
+
+        $this->_em->persist($notification);
+        $this->_em->flush();
     }
 }

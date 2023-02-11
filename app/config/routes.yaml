@@ -24,6 +24,9 @@ app_friend_add:
 app_friend_remove:
     path: /friend/remove/{id}
     controller: App\Controller\FriendsController::remove
+app_friend_accept:
+    path: /friend/accept/{id}
+    controller: App\Controller\FriendsController::accept
 # PAYMENTS
 app_payments:
     path: /payments

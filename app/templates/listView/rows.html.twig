@@ -5,20 +5,21 @@
                 <div class="list-rows-element">
                     <div class="list-rows-element-inner">
                         {% for element in row %}
-                            {% if element.type != 'id' %}
-                                <div class="list-element {{element.type}}">
-                                    {{element.value}}
-                                </div>
-                                {% if loop.last == true %}
-                                    <div class="list-element options">
-                                        <a href="/friend/remove/{{id_friend}}" class="red-label hover">
-                                            <i class="fa-regular fa-square-minus"></i>
-                                        </a>
+                        {% if element.type != 'data' %}
+                            {% if  element.type == 'options' %}
+                                <div class="list-element">
+                                    <div class="list-element-inner {{element.class}}">
+                                        {% include '/listView/options.html.twig' with {'options' : element.value } %}
                                     </div>
-                                {% endif %}
+                                </div>
                             {% else %}
-                                {% set id_friend = element.value %}
+                                <div class="list-element">
+                                    <div class="list-element-inner {{element.type}}">
+                                        {{element.value}}
+                                    </div>
+                                </div>
                             {% endif %}
+                        {% endif %}
                         {% endfor %}
                     </div>
                 </div>

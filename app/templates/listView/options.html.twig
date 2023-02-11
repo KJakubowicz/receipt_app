@@ -1,0 +1,11 @@
+{% for option in options %}
+    <a href="{{option.href}}" class="list-option-{{option.type}}">
+        {% if option.icon is defined%}
+            <i class="{{option.icon}}"></i>
+        {% elseif option.label is defined%}
+            <p class="option-label hover">
+                {{option.label}}
+            </p>
+        {% endif %}
+    </a>
+{% endfor %}
