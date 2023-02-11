@@ -133,13 +133,16 @@ class FriendsController extends AbstractController
             $newFriend->setCreatedAt($dataTime);
             $newFriend->setIdOwner($this->getUser()->getId());
             $newFriend->setConfirmed(false);
+            
+            $this->forward('App\Controller\NotificationsController::add', [
+                'from' => $newFriend->getIdOwner(),
+                'to' => $newFriend->getIdUser(),
+                'type' => 'NEW_FRIENDS',
+                'content' => 'Nowe zaproszenie do znajomych'
+            ]);
 
-            NotificationsController::send($newFriend->getIdOwner(), $newFriend->getIdUser(), 'FRIENDS','Nowe zaproszenie do znajomych');
-            die;
             $this->_em->persist($newFriend);
             $this->_em->flush();
-            
-           
 
             return $this->redirectToRoute('app_friends_list');
         }//end if

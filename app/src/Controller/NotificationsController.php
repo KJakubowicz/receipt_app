@@ -85,15 +85,26 @@ class NotificationsController extends AbstractController
             'controller_name' => 'NotificationController',
         ]);
     }
-
-    public static function send(int $from, int $to, string $type, string $content): void
+    
+    /**
+     * add
+     *
+     * @param  mixed $from
+     * @param  mixed $to
+     * @param  mixed $type
+     * @param  mixed $content
+     * @return void
+     */
+    public function add(int $from, int $to, string $type, string $content): void
     {
-        $entity = new Notifications();
-        $repository = new NotificationsRepository(new ManagerRegistry);
-        $entity->setIdUser($from);
-        $entity->setIdOwner($to);
-        $entity->setType($type);
-        $entity->setContent($content);
-        $repository->save($entity, true);
+        $notification = new Notifications();
+        $notification->setIdUser($from);
+        $notification->setIdOwner($to);
+        $notification->setType($type);
+        $notification->setContent($content);
+        $notification->setReaded(false);
+
+        $this->_em->persist($notification);
+        $this->_em->flush();
     }
 }
