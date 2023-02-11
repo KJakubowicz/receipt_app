@@ -39,7 +39,7 @@ class FriendsListBuilder extends ListBuilder {
                     switch (strtolower($key)) {
                         case 'id':
                             $temp[] = [
-                                'type' => 'id',
+                                'type' => 'data',
                                 'value' => $value,
                             ];
                             break;
@@ -57,6 +57,17 @@ class FriendsListBuilder extends ListBuilder {
                             break;
                     }
                 }
+                $temp[] = [
+                    'type' => 'options',
+                    'class' => 'options-small',
+                    'value' => [
+                        [
+                            'href' => '/friend/remove/'.$row['id'],
+                            'icon' => 'fa-regular fa-square-minus',
+                            'type' => 'remove red-label',
+                        ]
+                    ]
+                ];
                 $result[$i] = $temp;
                 $rowNumber++;
                 $i++;

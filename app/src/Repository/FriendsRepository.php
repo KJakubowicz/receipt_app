@@ -44,8 +44,8 @@ class FriendsRepository extends ServiceEntityRepository
         $query = $this->getEntityManager()->createQuery("
             Select 
                 f.id,
-                case when u2.name = '' then u.name else u2.name end name,
-                case when u2.surname = '' then u.surname else u2.surname end surname
+                coalesce(u2.name, u.name) name,
+                coalesce(u2.surname, u.surname) surname
             From App\Entity\Friends f
             Left join App\Entity\User u 
                 With u.id = f.id_user
@@ -54,7 +54,9 @@ class FriendsRepository extends ServiceEntityRepository
                 With u2.id = f.id_owner
                 And u2.id != :id
             Where 
-                f.id_owner = :id OR
+                f.id_owner = :id AND
+                f.confirmed = :confirmed 
+                OR
                 f.id_user = :id AND
                 f.confirmed = :confirmed
         ")

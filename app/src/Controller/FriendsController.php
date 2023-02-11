@@ -93,7 +93,7 @@ class FriendsController extends AbstractController
         );
         $listBuilder->addHeaderElement(
             [
-                'class' => 'large',
+                'class' => 'small',
                 'text' => 'Opcje'
             ],
         );

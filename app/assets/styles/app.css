@@ -332,8 +332,8 @@ a {
 .list-element-inner.options {
     width: 300px;
 }
-.list-element-inner .options-basic {
-    width: 150px;
+.list-element-inner.options-small {
+    width: 50px;
     justify-content: space-around;
 }
 .list-element-inner.options-basic {
