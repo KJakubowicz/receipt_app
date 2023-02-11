@@ -38,29 +38,24 @@ class NotificationsRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    
+    /**
+     * findByUserId
+     *
+     * @param  mixed $id
+     * @return array
+     */
+    public function findByUserId($id): array
+    {
+        $query = $this->getEntityManager()->createQuery('
+            Select n.id, n.type, n.content, n.readed, n.id_user, u.name, u.surname
+            From App\Entity\Notifications n
+            Left join App\Entity\User u 
+            With u.id = n.id_user
+            Where n.id_owner = :id
+        ')
+        ->setParameter('id', $id);
 
-//    /**
-//     * @return Notifications[] Returns an array of Notifications objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('n')
-//            ->andWhere('n.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('n.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Notifications
-//    {
-//        return $this->createQueryBuilder('n')
-//            ->andWhere('n.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        return $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+    }
 }
