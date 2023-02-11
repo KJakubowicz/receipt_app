@@ -20,20 +20,6 @@
                                 </div>
                             {% endif %}
                         {% endif %}
-                            {# {% if element.type != 'id' or element.type != 'data' %}
-                                <div class="list-element {{element.type}}">
-                                    {{element.value}}
-                                </div>
-                                {% if loop.last == true %}
-                                    <div class="list-element options">
-                                        <a href="/friend/remove/{{id_friend}}" class="red-label hover">
-                                            <i class="fa-regular fa-square-minus"></i>
-                                        </a> 
-                                    </div>
-                                {% endif %}
-                            {% else %}
-                                {% set id_friend = element.value %}
-                            {% endif %} #}
                         {% endfor %}
                     </div>
                 </div>

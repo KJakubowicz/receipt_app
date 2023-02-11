@@ -71,17 +71,17 @@ class NotificationsListBuilder extends ListBuilder {
                     'class' => 'options-basic',
                     'value' => [
                         [
-                            'href' => '/friends/accept/'.$row['id_user'],
+                            'href' => '/friend/accept/'.$row['id_user'],
                             'label' => 'Akceptuj',
                             'type' => 'accept green-label',
                         ],
                         [
-                            'href' => '/friends/decline/'.$row['id_user'],
+                            'href' => '/friend/decline/'.$row['id_user'],
                             'label' => 'Odrzuć',
                             'type' => 'decline',
                         ],
                         [
-                            'href' => '/notifications/remove/'.$row['id'],
+                            'href' => '/notification/remove/'.$row['id'],
                             'icon' => 'fa-regular fa-square-minus',
                             'type' => 'remove red-label',
                         ]
