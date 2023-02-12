@@ -136,4 +136,15 @@ class NotificationsController extends AbstractController
         $this->_em->remove($notification);
         $this->_em->flush();
     }
+   
+    /**
+     * getNotifications
+     *
+     * @return Response
+     */
+    public function getNotifications(): Response
+    {
+        $test = 2;
+        return $this->json($test);
+    }
 }
