@@ -39,3 +39,8 @@ app_payments:
 app_notification_list:
     path: /notifications
     controller: App\Controller\NotificationsController::list
+
+# API
+app_api_get_notifications:
+    path: /api/v1/notifications/get
+    controller: App\Controller\NotificationsController::getNotifications

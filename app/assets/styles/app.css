@@ -348,3 +348,23 @@ a {
 .list-rows-element:nth-child(odd) {
     background-color: #f3f3f3;
 }
+
+/* NOTIFICATIONS */
+.notifications-box {
+    position: relative;
+}
+.notification-count {
+    position: absolute;
+    font-size: 15px;
+    font-weight: bold;
+    color: black;
+    right: -9px;
+    height: 16px;
+    width: 16px;
+    bottom: -8px;
+    background-color: #ff6262;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
