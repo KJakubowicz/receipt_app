@@ -25,8 +25,12 @@ app_friend_remove:
     path: /friend/remove/{id}
     controller: App\Controller\FriendsController::remove
 app_friend_accept:
-    path: /friend/accept/{id}
+    path: /friend/accept/{idUser}/{id}
     controller: App\Controller\FriendsController::accept
+app_friend_decline:
+    path: /friend/decline/{idUser}/{id}
+    controller: App\Controller\FriendsController::decline
+
 # PAYMENTS
 app_payments:
     path: /payments
