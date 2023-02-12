@@ -25,7 +25,7 @@ class NotificationsListBuilder extends ListBuilder {
     private function prepareRows(array $rows): array
     {
         $result = [];
-           //dd($rows);
+
         if (!empty($rows)) {
             $i = 0;
             $rowNumber = 1;
@@ -71,20 +71,15 @@ class NotificationsListBuilder extends ListBuilder {
                     'class' => 'options-basic',
                     'value' => [
                         [
-                            'href' => '/friend/accept/'.$row['id_user'],
+                            'href' => '/friend/accept/'.$row['id_user'].'/'.$row['id'],
                             'label' => 'Akceptuj',
                             'type' => 'accept green-label',
                         ],
                         [
-                            'href' => '/friend/decline/'.$row['id_user'],
+                            'href' => '/friend/decline/'.$row['id_user'].'/'.$row['id'],
                             'label' => 'Odrzuć',
                             'type' => 'decline',
                         ],
-                        [
-                            'href' => '/notification/remove/'.$row['id'],
-                            'icon' => 'fa-regular fa-square-minus',
-                            'type' => 'remove red-label',
-                        ]
                     ]
                 ];
                 $result[$i] = $temp;

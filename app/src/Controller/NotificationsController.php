@@ -120,5 +120,20 @@ class NotificationsController extends AbstractController
 
         $this->_em->persist($notification);
         $this->_em->flush();
+
+    }
+    
+    /**
+     * remove
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function remove(int $id): void
+    {
+        $notification = $this->_repository->find($id);
+
+        $this->_em->remove($notification);
+        $this->_em->flush();
     }
 }

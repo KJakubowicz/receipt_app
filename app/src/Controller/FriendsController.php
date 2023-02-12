@@ -185,14 +185,38 @@ class FriendsController extends AbstractController
      * @param  mixed $id
      * @return Response
      */
-    public function accept($id): Response
+    public function accept($idUser, $id): Response
     {
         $date = new DateTimeImmutable();
-        $friend = $this->_repository->findFriendById($id, $this->getUser()->getId());
+        $friend = $this->_repository->findFriendById($idUser, $this->getUser()->getId());
         $friend->setConfirmed(true);
         $friend->setLastModification($date);
         $this->_em->persist($friend);
         $this->_em->flush();
+
+        $this->forward('App\Controller\NotificationsController::remove', [
+            'id' => $id,
+        ]);
+
+        return $this->redirectToRoute('app_friends_list');
+    }
+
+    /**
+     * accept
+     *
+     * @param  mixed $id
+     * @return Response
+     */
+    public function decline($idUser, $id): Response
+    {
+        $friend = $this->_repository->findFriendById($idUser, $this->getUser()->getId());
+
+        $this->_em->remove($friend);
+        $this->_em->flush();
+
+        $this->forward('App\Controller\NotificationsController::remove', [
+            'id' => $id,
+        ]);
 
         return $this->redirectToRoute('app_friends_list');
     }
