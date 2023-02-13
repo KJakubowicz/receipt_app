@@ -144,7 +144,7 @@ class NotificationsController extends AbstractController
      */
     public function getNotifications(): Response
     {
-        $test = 2;
-        return $this->json($test);
+        $notificationsCount = $this->_repository->getUnreadedCount($this->getUser()->getId());
+        return $this->json($notificationsCount);
     }
 }
