@@ -83,6 +83,7 @@ class NotificationsController extends AbstractController
         );
 
         $rows = $this->_repository->findByUserId($this->getUser()->getId());
+        $this->updateReaded($rows);
 
         $listBuilder->setRows($rows);
         $listBuilder->setPaggination(0);
@@ -123,6 +124,18 @@ class NotificationsController extends AbstractController
 
     }
     
+    public function updateReaded(array $notifications): void
+    {
+        if (!empty($notifications)) {
+            foreach ($notifications as $notification) {
+                $notification = $this->_repository->find($notification['id']);
+                $notification->setReaded(true);
+                $this->_em->persist($notification);
+                $this->_em->flush();
+            }
+        } 
+    }
+
     /**
      * remove
      *
@@ -132,7 +145,7 @@ class NotificationsController extends AbstractController
     public function remove(int $id): void
     {
         $notification = $this->_repository->find($id);
-
+        
         $this->_em->remove($notification);
         $this->_em->flush();
     }
@@ -144,7 +157,7 @@ class NotificationsController extends AbstractController
      */
     public function getNotifications(): Response
     {
-        $test = 2;
-        return $this->json($test);
+        $notificationsCount = $this->_repository->getUnreadedCount($this->getUser()->getId());
+        return $this->json($notificationsCount);
     }
 }
