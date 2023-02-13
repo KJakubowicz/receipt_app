@@ -87,11 +87,17 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             From App\Entity\User u
             Where u.id != :id
             AND u.id NOT IN (
-                Select f.id_user
+                Select 
+                coalesce(
+                    Case when f.id_user = :id Then :null else f.id_user End,
+                    Case when f.id_owner = :id Then :null else f.id_owner End
+                ) id
                 From App\Entity\Friends f
                 Where f.id_owner = :id
+                Or f.id_user = :id
             )
-        ')->setParameter('id', $id);
+        ')->setParameter('id', $id)
+        ->setParameter('null', null);
 
         return $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
     }
