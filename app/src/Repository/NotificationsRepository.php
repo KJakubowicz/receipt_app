@@ -58,4 +58,20 @@ class NotificationsRepository extends ServiceEntityRepository
 
         return $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
     }
+
+    public function getUnreadedCount($id): int
+    {
+        $query = $this->getEntityManager()->createQuery('
+            Select count(n.id)
+            From App\Entity\Notifications n
+            Left join App\Entity\User u 
+            With u.id = n.id_user
+            Where n.id_owner = :id
+            And n.readed = :readed
+        ')
+        ->setParameter('id', $id)
+        ->setParameter('readed', false);
+
+        return $query->getResult(\Doctrine\ORM\Query::HYDRATE_SINGLE_SCALAR);
+    }
 }

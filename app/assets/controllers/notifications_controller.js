@@ -10,6 +10,8 @@ export default class extends Controller {
         const data = await res.json();
         const count = JSON.parse(data);
         div.append(count);
-        this.element.append(div);
+        if (count > 0) {
+            this.element.append(div);
+        }
     }
 }
