@@ -12,6 +12,12 @@
                                         {% include '/listView/options.html.twig' with {'options' : element.value } %}
                                     </div>
                                 </div>
+                            {% elseif  element.type == 'status' %}
+                                <div class="list-element">
+                                    <div class="list-element-inner {{element.type}}">
+                                        {% include '/listView/status.html.twig' with {'status' : element.value } %}
+                                    </div>
+                                </div>
                             {% else %}
                                 <div class="list-element">
                                     <div class="list-element-inner {{element.type}}">
