@@ -34,7 +34,7 @@ app_friend_decline:
 # PAYMENTS
 app_payments:
     path: /payments
-    controller: App\Controller\PaymentsController::index
+    controller: App\Controller\PaymentsController::list
 # NOTIFIACTION
 app_notification_list:
     path: /notifications
