@@ -45,12 +45,19 @@ class PaymansListBuilder extends ListBuilder {
                             break;
                         case 'readed':
                         case 'id_user':
+                        case 'id_friend':
                         case 'id':
-                                $temp[] = [
-                                    'type' => 'data',
-                                    'value' => $value,
-                                ];
-                                break;
+                            $temp[] = [
+                                'type' => 'data',
+                                'value' => $value,
+                            ];
+                            break;
+                        case 'status':
+                            $temp[] = [
+                                'type' => 'status',
+                                'value' => $value,
+                            ];
+                            break;
                         case 'type':
                         case 'content':
                             $temp[] = [
@@ -66,22 +73,22 @@ class PaymansListBuilder extends ListBuilder {
                             break;
                     }
                 }
-                $temp[] = [
-                    'type' => 'options',
-                    'class' => 'options-basic',
-                    'value' => [
-                        [
-                            'href' => '/friend/accept/'.$row['id_user'].'/'.$row['id'],
-                            'label' => 'Akceptuj',
-                            'type' => 'accept green-label',
-                        ],
-                        [
-                            'href' => '/friend/decline/'.$row['id_user'].'/'.$row['id'],
-                            'label' => 'Odrzuć',
-                            'type' => 'decline',
-                        ],
-                    ]
-                ];
+                // $temp[] = [
+                //     'type' => 'options',
+                //     'class' => 'options-basic',
+                //     'value' => [
+                //         [
+                //             'href' => '/friend/accept/'.$row['id_user'].'/'.$row['id'],
+                //             'label' => 'Akceptuj',
+                //             'type' => 'accept green-label',
+                //         ],
+                //         [
+                //             'href' => '/friend/decline/'.$row['id_user'].'/'.$row['id'],
+                //             'label' => 'Odrzuć',
+                //             'type' => 'decline',
+                //         ],
+                //     ]
+                // ];
                 $result[$i] = $temp;
                 $rowNumber++;
                 $i++;

@@ -39,6 +39,20 @@ class PaymentsRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByIdUser($id_user): array
+    {
+        $query = $this->getEntityManager()->createQuery("
+            Select p.id, p.name, p.price, p.id_user, p.status,
+                concat(u.name, ' ', u.surname) friend
+            From App\Entity\Payments p
+            Left join App\Entity\User u
+            With u.id = p.id_friend
+            Where p.id_user = :id_user
+        ")->setParameter('id_user', $id_user);
+        
+        return $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+    }
+
 //    /**
 //     * @return Payments[] Returns an array of Payments objects
 //     */
