@@ -30,16 +30,17 @@ app_friend_accept:
 app_friend_decline:
     path: /friend/decline/{idUser}/{id}
     controller: App\Controller\FriendsController::decline
-
 # PAYMENTS
-app_payments:
+app_payments_list:
     path: /payments
     controller: App\Controller\PaymentsController::list
+app_payments_add:
+    path: /payment/add
+    controller: App\Controller\PaymentsController::add
 # NOTIFIACTION
 app_notification_list:
     path: /notifications
     controller: App\Controller\NotificationsController::list
-
 # API
 app_api_get_notifications:
     path: /api/v1/notifications/get
