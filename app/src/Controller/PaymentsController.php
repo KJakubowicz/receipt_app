@@ -70,19 +70,13 @@ class PaymentsController extends AbstractController
         $listBuilder->addHeaderElement(
             [
                 'class' => 'basic',
-                'text' => 'Osoba do rozliczenia'
-            ],
-        );
-        $listBuilder->addHeaderElement(
-            [
-                'class' => 'basic',
                 'text' => 'Status'
             ],
         );
         $listBuilder->addHeaderElement(
             [
-                'class' => 'small',
-                'text' => 'Opcje'
+                'class' => 'basic',
+                'text' => 'Osoba do rozliczenia'
             ],
         );
 
