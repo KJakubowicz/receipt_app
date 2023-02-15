@@ -15,7 +15,7 @@
                             {% elseif  element.type == 'status' %}
                                 <div class="list-element">
                                     <div class="list-element-inner {{element.type}}">
-                                        {% include '/listView/status.html.twig' with {'status' : element.value } %}
+                                        {% include '/listView/status.html.twig' with {'status' : element.data } %}
                                     </div>
                                 </div>
                             {% else %}

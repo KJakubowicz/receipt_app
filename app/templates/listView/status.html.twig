@@ -1,1 +1,13 @@
-jest
+{% if status.type == 'label' %}
+    <div class="status-label">
+        {% if status.value == 1 %}
+            <p class="{{status.true.class}}">
+                {{status.true.label}}
+            </p>
+        {% else %}
+            <p class="{{status.false.class}}">
+                {{status.false.label}}
+            </p>
+        {% endif %}
+    </div>
+{% endif %}
