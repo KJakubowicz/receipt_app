@@ -8,6 +8,9 @@ use App\Builder\ListView\Builder\Paymants\PaymansListBuilder;
 use App\Builder\ListView\Maker\ListMaker;
 use App\Repository\PaymentsRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use App\Form\PaymentsAddFormType;
+use DateTimeImmutable;
 
 class PaymentsController extends AbstractController
 {
@@ -70,19 +73,13 @@ class PaymentsController extends AbstractController
         $listBuilder->addHeaderElement(
             [
                 'class' => 'basic',
-                'text' => 'Osoba do rozliczenia'
-            ],
-        );
-        $listBuilder->addHeaderElement(
-            [
-                'class' => 'basic',
                 'text' => 'Status'
             ],
         );
         $listBuilder->addHeaderElement(
             [
-                'class' => 'small',
-                'text' => 'Opcje'
+                'class' => 'basic',
+                'text' => 'Osoba do rozliczenia'
             ],
         );
 
@@ -99,6 +96,47 @@ class PaymentsController extends AbstractController
                     'name' => 'Znajomi',
                     'href' => '#'
                 ]
+            ],
+        ]);
+    }
+
+    public function add(Request $request): Response
+    {
+        $form = $this->createForm(PaymentsAddFormType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() === true && $form->isValid() === true) {
+            $newFriend = $form->getData();
+            $dataTime = new \DateTimeImmutable();
+
+            $newFriend->setCreatedAt($dataTime);
+            $newFriend->setIdOwner($this->getUser()->getId());
+            $newFriend->setConfirmed(false);
+            
+            $this->forward('App\Controller\NotificationsController::add', [
+                'from' => $newFriend->getIdOwner(),
+                'to' => $newFriend->getIdUser(),
+                'type' => 'NEW_FRIENDS',
+                'content' => 'Nowe zaproszenie do znajomych'
+            ]);
+
+            $this->_em->persist($newFriend);
+            $this->_em->flush();
+
+            return $this->redirectToRoute('app_friends_list');
+        }//end if
+
+        return $this->render('payments/add.html.twig', [
+            'form' => $form->createView(),
+            'breadcrumbs' => [
+                [
+                    'name' => 'Znajomi',
+                    'href' => '/payments'
+                ],
+                [
+                    'name' => 'Dodaj płatność',
+                    'href' => '#'
+                ],
             ],
         ]);
     }

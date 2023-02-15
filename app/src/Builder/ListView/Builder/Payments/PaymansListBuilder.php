@@ -55,7 +55,18 @@ class PaymansListBuilder extends ListBuilder {
                         case 'status':
                             $temp[] = [
                                 'type' => 'status',
-                                'value' => $value,
+                                'data' => [
+                                    'type' => 'label',
+                                    'value' => $value,
+                                    'true' => [
+                                        'label' => 'Opłacony',
+                                        'class' => 'green-label'
+                                    ],
+                                    'false' => [
+                                        'label' => 'Nieopłacony',
+                                        'class' => 'red-label'
+                                    ]
+                                ]
                             ];
                             break;
                         case 'type':
