@@ -44,8 +44,10 @@ body {
     height: 35px;
     align-items: center;
 }
-.select-box label {
+form label {
+    width: 160px;
     padding-right: 20px;
+    display: inline-block;
 }
 .select-box select {
     width: 300px;
@@ -56,6 +58,12 @@ body {
 .submit-box {
     padding-top: 20px;
     width: 200px;
+}
+.basic-box input {
+    width: 300px;
+    height: 30px;
+    border: 2px solid #cfcfcf;
+    border-radius: 5px;
 }
 .hover:hover {
     opacity: 0.5;
