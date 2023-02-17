@@ -39,6 +39,10 @@ body {
     width: 16px;
     height: 16px;
 }
+.basic-box,
+.select-box {
+    padding: 5px 0;
+}
 .select-box {
     display: flex;
     height: 35px;
@@ -62,8 +66,13 @@ form label {
 .basic-box input {
     width: 300px;
     height: 30px;
-    border: 2px solid #cfcfcf;
-    border-radius: 5px;
+    border: none;
+    border-bottom: 1px solid #d1d1d1;
+    font-size: 18px;
+}
+.basic-box input:focus-visible {
+    outline: none;
+    border-bottom: 1px solid black;
 }
 .hover:hover {
     opacity: 0.5;
@@ -327,6 +336,9 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.list-element-inner.status {
+    width: 150px;
 }
 .list-element-inner.number {
     width: 50px;
