@@ -40,26 +40,18 @@ class PaymentsAddFormType extends AbstractType
                 ]
             )
             ->add(
-                'id_user',
-                ChoiceType::class,
-                [
-                    'choices' => [],
-                    'label' => 'Wybierz znajomego',
-                    'required' => true,
-                    'row_attr' => [
-                        'class' => 'select-box',
-                    ],
-                ]
-            )
-            ->add(
                 'id_friend',
                 ChoiceType::class,
                 [
-                    'choices' => [],
+                    'choices' => [
+                        'nowy' => 'test',
+                        'test' =>  'asdas',
+                    ],
                     'label' => 'Wybierz znajomego',
                     'required' => true,
                     'row_attr' => [
                         'class' => 'select-box',
+                        'data-controller' => 'select'
                     ],
                 ]
             )
