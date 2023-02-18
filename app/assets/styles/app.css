@@ -58,7 +58,36 @@ select {
     -moz-appearance: none;
     appearance: none; /* Remove default arrow */
 }
-
+.select-content {
+    width: 300px;
+    height: 30px;
+    border-bottom: 1px solid black;
+    position: relative;
+}
+.select-options-box {
+    position: absolute;
+    top: 31px;
+    display: none;
+    flex-direction: column;
+    border: 1px solid #d1d1d1;
+    border-top: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+.select-child {
+    box-sizing: border-box;
+    display: flex;
+    height: 30px;
+    background-color: #c8e9f9;
+    padding-left: 15px;
+    align-items: center;
+}
+.select-active {
+    width: 300px;
+    height: 30px;
+    padding-left: 10px;
+    font-size: 18px;
+}
 .select-box select {
     width: 300px;
     height: 30px;
@@ -85,6 +114,11 @@ select {
 .basic-box input:focus-visible {
     outline: none;
     border-bottom: 1px solid black;
+}
+.hover-select:hover {
+    cursor: pointer;
+    transition: 0.2s all ease;
+    background: white;
 }
 .hover:hover {
     opacity: 0.5;
