@@ -44,8 +44,8 @@ class PaymentsAddFormType extends AbstractType
                 ChoiceType::class,
                 [
                     'choices' => [
-                        'nowy' => 'test',
-                        'test' =>  'asdas',
+                        '1' => '1',
+                        '4' =>  '4',
                     ],
                     'label' => 'Wybierz znajomego',
                     'required' => true,
@@ -59,13 +59,14 @@ class PaymentsAddFormType extends AbstractType
                 'status',
                 CheckboxType::class,
                 [
-                    'mapped' => false,
+                    'mapped' => true,
                     'row_attr' => [
                         'class' => 'checkbox-content',
                     ],
                     'attr' => [
                         'class' => 'input-checkbox'
                     ],
+                    'required' => false
                 ]
             )->add(
                 'save',
