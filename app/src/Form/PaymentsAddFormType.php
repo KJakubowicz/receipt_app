@@ -21,7 +21,7 @@ class PaymentsAddFormType extends AbstractType
                 'name',
                 TextType::class,
                 [
-                    'label' => 'Wybierz znajomego',
+                    'label' => 'Nazwa płatności',
                     'required' => true,
                     'row_attr' => [
                         'class' => 'basic-box',
@@ -66,6 +66,18 @@ class PaymentsAddFormType extends AbstractType
                     'attr' => [
                         'class' => 'input-checkbox'
                     ],
+                ]
+            )->add(
+                'save',
+                SubmitType::class,
+                [
+                    'row_attr' => [
+                        'class' => 'submit-box',
+                    ],
+                    'label' => 'Dodaj płatność',
+                    'attr' => [
+                        'class' => 'submit-button hover'
+                    ]
                 ]
             );
     }
