@@ -28,6 +28,12 @@ class Payments
     #[ORM\Column]
     private ?bool $status = null;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $created_at = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $last_modification = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,6 +95,30 @@ class Payments
     public function setStatus(bool $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $created_at): self
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getLastModification(): ?\DateTimeImmutable
+    {
+        return $this->last_modification;
+    }
+
+    public function setLastModification(?\DateTimeImmutable $last_modification): self
+    {
+        $this->last_modification = $last_modification;
 
         return $this;
     }
