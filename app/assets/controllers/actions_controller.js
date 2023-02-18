@@ -17,7 +17,6 @@ export default class extends Controller {
 
     setSelectValue(event) {
         const value = event.target.getAttribute("data-value");
-        console.log(event);
         const activeElement = event.target.parentElement.previousSibling;
         activeElement.replaceChildren(value);
         const select = activeElement.parentElement.previousSibling;

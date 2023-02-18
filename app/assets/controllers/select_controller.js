@@ -35,7 +35,6 @@ export default class extends Controller {
             let position = 30 * (index + 1);
             const element = options[index];
             let divChild = document.createElement("div");
-            let span = document.createElement("span");
             let value = "nowy" + index;
             divChild.setAttribute("class", "select-child hover-select");
             divChild.setAttribute("data-controller", "actions");
@@ -45,8 +44,7 @@ export default class extends Controller {
             );
             divChild.setAttribute("data-value", value);
             divChild.setAttribute("style", "top:" + position + "px");
-            span.append(value);
-            divChild.append(span);
+            divChild.append(value);
             divOptionsBox.append(divChild);
         }
         div.append(divOptionsBox);
