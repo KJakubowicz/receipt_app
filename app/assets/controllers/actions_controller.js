@@ -9,10 +9,17 @@ export default class extends Controller {
         } else {
             optionsBox = element;
         }
-
+        const selectContent = optionsBox.parentElement;
         const visable = getComputedStyle(optionsBox).display;
-        const display = visable === "none" ? "flex" : "none";
+        let display = "none";
+        let selectClass = "select-content";
+
+        if (visable === "none") {
+            display = "flex";
+            selectClass = "select-content opened";
+        }
         optionsBox.style.display = display;
+        selectContent.setAttribute("class", selectClass);
     }
 
     setSelectValue(event) {
