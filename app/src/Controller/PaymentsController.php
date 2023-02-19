@@ -11,6 +11,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\PaymentsAddFormType;
 use DateTimeImmutable;
+use App\Helper\FriendsHelper;
+use App\Repository\FriendsRepository;
 
 class PaymentsController extends AbstractController
 {
@@ -27,6 +29,13 @@ class PaymentsController extends AbstractController
      * @var EntityManagerInterface
      */
     private EntityManagerInterface $_em;
+
+    /**
+     * Class FriendsRepository.
+     *
+     * @var FriendsRepository
+     */
+    private FriendsRepository $_friendsRepository;
     
     /**
      * __construct
@@ -35,10 +44,11 @@ class PaymentsController extends AbstractController
      * @param  mixed $em
      * @return void
      */
-    public function __construct(PaymentsRepository $repository, EntityManagerInterface $em)
+    public function __construct(PaymentsRepository $repository, EntityManagerInterface $em, FriendsRepository $friendsRepository)
     {
         $this->_repository = $repository;
         $this->_em = $em;
+        $this->_friendsRepository = $friendsRepository;
     }
 
     public function list(): Response
@@ -102,7 +112,11 @@ class PaymentsController extends AbstractController
 
     public function add(Request $request): Response
     {
-        $form = $this->createForm(PaymentsAddFormType::class);
+        $choices = FriendsHelper::getChoisesForForm(
+            $this->_friendsRepository->findFriendsByUserId($this->getUser()->getId())
+        );
+
+        $form = $this->createForm(PaymentsAddFormType::class, null, ['choices' => $choices]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() === true && $form->isValid() === true) {
