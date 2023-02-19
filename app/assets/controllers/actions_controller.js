@@ -27,16 +27,6 @@ export default class extends Controller {
         const activeElement = event.target.parentElement.previousSibling;
         activeElement.replaceChildren(value);
         const select = activeElement.parentElement.previousSibling;
-        // const attribute = select.getAttribute("name");
-        // const test = activeElement.nextSibling;
-        // if (attribute) {
-        //     const attributeIndex = attribute.substring(
-        //         attribute.indexOf(),
-        //         attribute.lastIndexOf("[")
-        //     );
-        //     const newAttribute = attributeIndex + "[" + value + "]";
-        //     select.setAttribute("name", newAttribute);
-        // }
         select.setAttribute("value", value);
 
         this.showHideSelect("", activeElement.nextSibling);
