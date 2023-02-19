@@ -43,10 +43,7 @@ class PaymentsAddFormType extends AbstractType
                 'id_friend',
                 ChoiceType::class,
                 [
-                    'choices' => [
-                        '1' => '1',
-                        '4' =>  '4',
-                    ],
+                    'choices' => $options['choices'],
                     'label' => 'Wybierz znajomego',
                     'required' => true,
                     'row_attr' => [
@@ -87,6 +84,7 @@ class PaymentsAddFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Payments::class,
+            'choices' => [],
         ]);
     }
 }
