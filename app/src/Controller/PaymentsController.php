@@ -125,12 +125,12 @@ class PaymentsController extends AbstractController
             $newPayment->setIdUser($this->getUser()->getId());
             $newPayment->setCreatedAt($dataTime);
 
-            // $this->forward('App\Controller\NotificationsController::add', [
-            //     'from' => $newFriend->getIdOwner(),
-            //     'to' => $newFriend->getIdUser(),
-            //     'type' => 'NEW_FRIENDS',
-            //     'content' => 'Nowe zaproszenie do znajomych'
-            // ]);
+            $this->forward('App\Controller\NotificationsController::add', [
+                'from' => $this->getUser()->getId(),
+                'to' => $newPayment->getIdFriend(),
+                'type' => 'NEW_PAYMENT',
+                'content' => 'Nowa płatność'
+            ]);
 
             $this->_em->persist($newPayment);
             $this->_em->flush();

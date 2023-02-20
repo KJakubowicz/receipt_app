@@ -1,6 +1,8 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
+    static activeId;
+
     showHideSelect(event = "", element = "") {
         let optionsBox = "";
         if (element === "") {
@@ -24,11 +26,19 @@ export default class extends Controller {
 
     setSelectValue(event) {
         const value = event.target.getAttribute("data-value");
+        const id = event.target.getAttribute("data-id");
+        const textContent = value ? event.target.textContent : "";
         const activeElement = event.target.parentElement.previousSibling;
-        activeElement.replaceChildren(value);
+        activeElement.replaceChildren(textContent);
         const select = activeElement.parentElement.previousSibling;
         select.setAttribute("value", value);
-
+        const children = select.children;
+        for (let index = 0; index < children.length; index++) {
+            let element = children[index];
+            element.removeAttribute("selected");
+        }
+        const selectedOption = document.getElementById(id);
+        selectedOption.setAttribute("selected", "selected");
         this.showHideSelect("", activeElement.nextSibling);
     }
 }
