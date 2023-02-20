@@ -22,7 +22,6 @@ export default class extends Controller {
         div.setAttribute("data-controller", "actions");
         div.setAttribute("data-action", "click->actions#showHideSelect");
         let span = document.createElement("span");
-
         const divOptionsBox = document.createElement("div");
         divOptionsBox.setAttribute("class", "select-options-box");
         divOptionsBox.setAttribute("id", "select-target");
@@ -32,10 +31,11 @@ export default class extends Controller {
         div.append(divActive);
 
         for (let index = 0; index < options.length; index++) {
+            let id = this.randomId();
             let position = 30 * (index + 1);
             const element = options[index];
+            element.removeAttribute("selected");
             let divChild = document.createElement("div");
-            console.log(element.textContent);
             let value = element.value;
             let content = element.textContent;
             divChild.setAttribute("class", "select-child hover-select");
@@ -44,12 +44,18 @@ export default class extends Controller {
                 "data-action",
                 "click->actions#setSelectValue"
             );
+            divChild.setAttribute("data-id", id);
             divChild.setAttribute("data-value", value);
             divChild.setAttribute("style", "top:" + position + "px");
             divChild.append(content);
             divOptionsBox.append(divChild);
+            element.setAttribute("id", id);
         }
         div.append(divOptionsBox);
         return div;
+    }
+
+    randomId() {
+        return (Math.random() + 1).toString(36).substring(7);
     }
 }
