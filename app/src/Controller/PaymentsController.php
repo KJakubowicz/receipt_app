@@ -51,7 +51,7 @@ class PaymentsController extends AbstractController
         $this->_friendsRepository = $friendsRepository;
     }
 
-    public function list(): Response
+    public function madePayments(): Response
     {
         $listBuilder = new PaymansListBuilder();
         $listBuilder->addButton([
