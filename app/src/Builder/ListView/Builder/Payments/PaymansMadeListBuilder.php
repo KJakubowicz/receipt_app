@@ -4,7 +4,7 @@ namespace App\Builder\ListView\Builder\Paymants;
 
 use App\Builder\ListView\Builder\ListBuilder;
 
-class PaymansListBuilder extends ListBuilder {
+class PaymansMadeListBuilder extends ListBuilder {
 
     public function addButton(array $button = []): void
     {

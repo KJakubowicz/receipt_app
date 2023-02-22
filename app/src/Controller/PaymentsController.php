@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use App\Builder\ListView\Builder\Paymants\PaymansListBuilder;
+use App\Builder\ListView\Builder\Paymants\PaymansMadeListBuilder;
 use App\Builder\ListView\Maker\ListMaker;
 use App\Repository\PaymentsRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -53,7 +53,7 @@ class PaymentsController extends AbstractController
 
     public function madePayments(): Response
     {
-        $listBuilder = new PaymansListBuilder();
+        $listBuilder = new PaymansMadeListBuilder();
         $listBuilder->addButton([
             'type' => 'add',
             'properties' => [
@@ -117,7 +117,7 @@ class PaymentsController extends AbstractController
      */
     public function clearingPayments(): Response
     {
-        $listBuilder = new PaymansListBuilder();
+        $listBuilder = new PaymansMadeListBuilder();
 
         $listBuilder->addHeaderElement(
             [
