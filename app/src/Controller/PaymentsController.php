@@ -4,7 +4,8 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use App\Builder\ListView\Builder\Paymants\PaymansListBuilder;
+use App\Builder\ListView\Builder\Paymants\PaymansMadeListBuilder;
+use App\Builder\ListView\Builder\Paymants\PaymansClearingListBuilder;
 use App\Builder\ListView\Maker\ListMaker;
 use App\Repository\PaymentsRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -53,7 +54,7 @@ class PaymentsController extends AbstractController
 
     public function madePayments(): Response
     {
-        $listBuilder = new PaymansListBuilder();
+        $listBuilder = new PaymansMadeListBuilder();
         $listBuilder->addButton([
             'type' => 'add',
             'properties' => [
@@ -104,6 +105,69 @@ class PaymentsController extends AbstractController
             'breadcrumbs' => [
                 [
                     'name' => 'Znajomi',
+                    'href' => '#'
+                ]
+            ],
+        ]);
+    }
+    
+    /**
+     * clearingPayments
+     *
+     * @return Response
+     */
+    public function clearingPayments(): Response
+    {
+        $listBuilder = new PaymansClearingListBuilder();
+
+        $listBuilder->addHeaderElement(
+            [
+                'class' => 'small',
+                'text' => 'LP.'
+            ],
+        );
+        $listBuilder->addHeaderElement(
+            [
+                'class' => 'basic',
+                'text' => 'Nazwa płatności'
+            ],
+        );
+        $listBuilder->addHeaderElement(
+            [
+                'class' => 'basic',
+                'text' => 'Suma'
+            ],
+        );
+        $listBuilder->addHeaderElement(
+            [
+                'class' => 'basic',
+                'text' => 'Status'
+            ],
+        );
+        $listBuilder->addHeaderElement(
+            [
+                'class' => 'basic',
+                'text' => 'Osoba rozliczająca'
+            ],
+        );
+        $listBuilder->addHeaderElement(
+            [
+                'class' => 'small',
+                'text' => 'Opcje'
+            ],
+        );
+
+        $rows = $this->_repository->findClearingByIdUser($this->getUser()->getId());
+        $listBuilder->setRows($rows);
+        $listBuilder->setPaggination(0);
+        $listView = new ListMaker($listBuilder);
+
+        return $this->render('listView/listView.html.twig', [
+            'controller_name' => 'PaymentsController',
+            'listView' => $listView->makeList(),
+            'breadcrumbs' => [
+                [
+                    'name' => 'Płatności do rozliczenia',
                     'href' => '#'
                 ]
             ],
