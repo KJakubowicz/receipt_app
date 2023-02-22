@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use App\Builder\ListView\Builder\Paymants\PaymansMadeListBuilder;
+use App\Builder\ListView\Builder\Paymants\PaymansClearingListBuilder;
 use App\Builder\ListView\Maker\ListMaker;
 use App\Repository\PaymentsRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -117,7 +118,7 @@ class PaymentsController extends AbstractController
      */
     public function clearingPayments(): Response
     {
-        $listBuilder = new PaymansMadeListBuilder();
+        $listBuilder = new PaymansClearingListBuilder();
 
         $listBuilder->addHeaderElement(
             [
