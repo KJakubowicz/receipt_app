@@ -53,6 +53,21 @@ class PaymentsRepository extends ServiceEntityRepository
         return $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
     }
 
+    public function findClearingByIdUser($id): array
+    {
+        $query = $this->getEntityManager()->createQuery("
+            Select p.id, p.name, p.price, p.id_user, p.status,
+                concat(u.name, ' ', u.surname) friend
+            From App\Entity\Payments p
+            Left join App\Entity\User u
+            With u.id = p.id_user
+            Where p.id_friend = :id_friend
+            And p.status = :status
+        ")->setParameter('id_friend', $id)
+        ->setParameter('status', false);
+        
+        return $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+    }
 //    /**
 //     * @return Payments[] Returns an array of Payments objects
 //     */
