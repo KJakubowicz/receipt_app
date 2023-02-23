@@ -235,4 +235,62 @@ class PaymentsController extends AbstractController
 
         return $this->redirectToRoute('app_payments_clearing_list');
     }
+
+    public function billings(Request $request): Response
+    {
+        $listBuilder = new PaymansClearingListBuilder();
+
+        $listBuilder->addHeaderElement(
+            [
+                'class' => 'small',
+                'text' => 'LP.'
+            ],
+        );
+        $listBuilder->addHeaderElement(
+            [
+                'class' => 'basic',
+                'text' => 'Nazwa płatności'
+            ],
+        );
+        $listBuilder->addHeaderElement(
+            [
+                'class' => 'basic',
+                'text' => 'Suma'
+            ],
+        );
+        $listBuilder->addHeaderElement(
+            [
+                'class' => 'basic',
+                'text' => 'Status'
+            ],
+        );
+        $listBuilder->addHeaderElement(
+            [
+                'class' => 'basic',
+                'text' => 'Osoba rozliczająca'
+            ],
+        );
+        $listBuilder->addHeaderElement(
+            [
+                'class' => 'basic',
+                'text' => 'Opcje'
+            ],
+        );
+
+        $rows = $this->_repository->findClearingByIdUser($this->getUser()->getId());
+        $listBuilder->setRows($rows);
+        $listBuilder->setPaggination(0);
+        $listView = new ListMaker($listBuilder);
+
+        return $this->render('listView/listView.html.twig', [
+            'controller_name' => 'PaymentsController',
+            'listView' => $listView->makeList(),
+            'breadcrumbs' => [
+                [
+                    'name' => 'Raport rozliczeń',
+                    'href' => '#'
+                ]
+            ],
+        ]);
+    }
 }
