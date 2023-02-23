@@ -33,10 +33,13 @@ app_friend_decline:
 # PAYMENTS
 app_payments_made_list:
     path: /payments/made/list
-    controller: App\Controller\PaymentsController::madePayments
+    controller: App\Controller\PaymentsController::madePaymentsList
 app_payments_clearing_list:
     path: /payments/clearing/list
-    controller: App\Controller\PaymentsController::clearingPayments
+    controller: App\Controller\PaymentsController::clearingPaymentsList
+app_payments_set_clearing:
+    path: /payment/cleared/{id}
+    controller: App\Controller\PaymentsController::setClearing
 app_payments_add:
     path: /payment/add
     controller: App\Controller\PaymentsController::add

@@ -1,3 +1,6 @@
+/*!**************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[1].use[1]!./assets/styles/app.css ***!
+  \**************************************************************************************************************/
 *,
 html {
     margin: 0;
@@ -251,13 +254,22 @@ a {
     font-size: 18px;
     font-weight: 500;
 }
-.menu-block-child {
-    padding: 10px;
+.menu-block {
     display: flex;
     align-items: center;
+    flex-direction: column;
 }
-.menu-block-child i {
+.menu-block i {
     width: 30px;
+}
+.menu-block-inner {
+    position: relative;
+    height: 40px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 21px;
+    box-sizing: border-box;
 }
 .menu-name {
     -webkit-box-shadow: inset 0px -16px 46px -44px rgba(66, 68, 90, 1);
@@ -270,6 +282,26 @@ a {
 }
 .menu-container a {
     color: #0000008c;
+}
+.menu-block-js {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+.block-child-container {
+    width: 100%;
+    display: none;
+    flex-direction: column;
+}
+.block-child-1 {
+    display: flex;
+    height: 35px;
+    align-items: center;
+    padding-left: 40px;
+    font-size: 16px;
+    border-bottom: 1px solid #e9eaec;
 }
 /* LOGIN PANEL */
 .panel-layout-gradient {

@@ -84,22 +84,17 @@ class PaymansClearingListBuilder extends ListBuilder {
                             break;
                     }
                 }
-                // $temp[] = [
-                //     'type' => 'options',
-                //     'class' => 'options-basic',
-                //     'value' => [
-                //         [
-                //             'href' => '/friend/accept/'.$row['id_user'].'/'.$row['id'],
-                //             'label' => 'Akceptuj',
-                //             'type' => 'accept green-label',
-                //         ],
-                //         [
-                //             'href' => '/friend/decline/'.$row['id_user'].'/'.$row['id'],
-                //             'label' => 'Odrzuć',
-                //             'type' => 'decline',
-                //         ],
-                //     ]
-                // ];
+                $temp[] = [
+                    'type' => 'options',
+                    'class' => 'options-basic',
+                    'value' => [
+                        [
+                            'href' => '/payment/cleared/'.$row['id'],
+                            'label' => 'Rozliczone',
+                            'type' => 'accept green-label',
+                        ],
+                    ]
+                ];
                 $result[$i] = $temp;
                 $rowNumber++;
                 $i++;
