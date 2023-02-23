@@ -43,6 +43,9 @@ app_payments_set_clearing:
 app_payments_add:
     path: /payment/add
     controller: App\Controller\PaymentsController::add
+app_billings:
+    path: /billings
+    controller: App\Controller\PaymentsController::billings
 # NOTIFIACTION
 app_notification_list:
     path: /notifications
