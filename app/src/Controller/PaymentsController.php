@@ -52,7 +52,7 @@ class PaymentsController extends AbstractController
         $this->_friendsRepository = $friendsRepository;
     }
 
-    public function madePayments(): Response
+    public function madePaymentsList(): Response
     {
         $listBuilder = new PaymansMadeListBuilder();
         $listBuilder->addButton([
@@ -104,7 +104,7 @@ class PaymentsController extends AbstractController
             'listView' => $listView->makeList(),
             'breadcrumbs' => [
                 [
-                    'name' => 'Znajomi',
+                    'name' => 'Wykonane płatności',
                     'href' => '#'
                 ]
             ],
@@ -112,11 +112,11 @@ class PaymentsController extends AbstractController
     }
     
     /**
-     * clearingPayments
+     * clearingPaymentsList
      *
      * @return Response
      */
-    public function clearingPayments(): Response
+    public function clearingPaymentsList(): Response
     {
         $listBuilder = new PaymansClearingListBuilder();
 
@@ -152,7 +152,7 @@ class PaymentsController extends AbstractController
         );
         $listBuilder->addHeaderElement(
             [
-                'class' => 'small',
+                'class' => 'basic',
                 'text' => 'Opcje'
             ],
         );
@@ -206,13 +206,90 @@ class PaymentsController extends AbstractController
             'form' => $form->createView(),
             'breadcrumbs' => [
                 [
-                    'name' => 'Znajomi',
+                    'name' => 'Płatności',
                     'href' => '/payments'
                 ],
                 [
                     'name' => 'Dodaj płatność',
                     'href' => '#'
                 ],
+            ],
+        ]);
+    }
+
+    public function setClearing(int $id): Response
+    {
+        $date = new DateTimeImmutable();
+        $payment = $this->_repository->find($id);
+        $payment->setStatus(true);
+        $payment->setLastModification($date);
+        $this->_em->persist($payment);
+        $this->_em->flush();
+
+        $this->forward('App\Controller\NotificationsController::add', [
+            'from' => $payment->getIdFriend(),
+            'to' => $payment->getIdUser(),
+            'type' => 'PAYMENT_CLEARING',
+            'content' => 'Płatność o nazwie "'.$payment->getName().'" została rozliczona'
+        ]);
+
+        return $this->redirectToRoute('app_payments_clearing_list');
+    }
+
+    public function billings(Request $request): Response
+    {
+        $listBuilder = new PaymansClearingListBuilder();
+
+        $listBuilder->addHeaderElement(
+            [
+                'class' => 'small',
+                'text' => 'LP.'
+            ],
+        );
+        $listBuilder->addHeaderElement(
+            [
+                'class' => 'basic',
+                'text' => 'Nazwa płatności'
+            ],
+        );
+        $listBuilder->addHeaderElement(
+            [
+                'class' => 'basic',
+                'text' => 'Suma'
+            ],
+        );
+        $listBuilder->addHeaderElement(
+            [
+                'class' => 'basic',
+                'text' => 'Status'
+            ],
+        );
+        $listBuilder->addHeaderElement(
+            [
+                'class' => 'basic',
+                'text' => 'Osoba rozliczająca'
+            ],
+        );
+        $listBuilder->addHeaderElement(
+            [
+                'class' => 'basic',
+                'text' => 'Opcje'
+            ],
+        );
+
+        $rows = $this->_repository->findClearingByIdUser($this->getUser()->getId());
+        $listBuilder->setRows($rows);
+        $listBuilder->setPaggination(0);
+        $listView = new ListMaker($listBuilder);
+
+        return $this->render('listView/listView.html.twig', [
+            'controller_name' => 'PaymentsController',
+            'listView' => $listView->makeList(),
+            'breadcrumbs' => [
+                [
+                    'name' => 'Raport rozliczeń',
+                    'href' => '#'
+                ]
             ],
         ]);
     }
