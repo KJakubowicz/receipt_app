@@ -27,11 +27,21 @@
                     </a>
                 </div>
             </div>
-            <div class="menu-block hover-gray">
+            <div class="menu-block block-parent hover-gray">
                 <div class="menu-block-inner">
+                    <div class="menu-block-js" data-action="mouseover->mouse#showElement mouseout->mouse#hideElement">
+                    </div>
                     <i class="fa-solid fa-user-group pr-10"></i>
-                    <a href="/friends">
+                    <span>
                         Znajomi
+                    </span>
+                </div>
+                <div class="block-child-container" data-action="mouseover->mouse#mouseOver mouseout->mouse#mouseOut">
+                    <a href="/friend/add" class="block-child-1">
+                        Dodaj znajomego
+                    </a>
+                    <a href="/friends" class="block-child-1">
+                        Lista znajomych
                     </a>
                 </div>
             </div>
