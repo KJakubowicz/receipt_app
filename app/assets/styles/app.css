@@ -214,6 +214,9 @@ a {
     height: 900px;
     width: 1280px;
     border-radius: 12px;
+    -webkit-box-shadow: 18px 18px 23px -32px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 18px 18px 23px -32px rgba(66, 68, 90, 1);
+    box-shadow: 18px 18px 23px -32px rgba(66, 68, 90, 1);
 }
 .main-container-inner {
     height: 100%;
@@ -228,8 +231,7 @@ a {
     border-bottom-left-radius: 15px;
 }
 .left-side-inner {
-    height: 100%;
-    box-sizing: border-box;
+    height: auto;
 }
 .content {
     margin-left: 250px;
@@ -243,11 +245,12 @@ a {
     min-height: calc(100vh - 130px);
 }
 .logo {
-    padding: 42px;
+    margin: 42px;
     display: flex;
     font-size: 32px;
     align-items: center;
     justify-content: space-evenly;
+    color: white;
 }
 .user-inner {
     display: flex;
@@ -308,6 +311,22 @@ a {
     height: 42px;
     align-items: center;
     padding-left: 60px;
+}
+.menu-element:hover,
+.menu-element.active {
+    color: white;
+    background-color: #5374f0;
+    cursor: pointer;
+    transition: 0.3s all ease;
+}
+.menu-element i {
+    display: flex;
+    width: 30px;
+    align-items: center;
+    justify-content: center;
+}
+.menu-text {
+    width: 124px;
 }
 /* .menu-container {
     width: 250px;
@@ -535,17 +554,18 @@ a {
 /* NOTIFICATIONS */
 .notifications-box {
     position: relative;
+    font-size: 24px;
 }
 .notification-count {
     position: absolute;
     font-size: 15px;
-    font-weight: bold;
-    color: black;
-    right: -9px;
-    height: 16px;
-    width: 16px;
+    /* font-weight: bold; */
+    color: white;
+    right: 0;
+    height: 24px;
+    width: 24px;
     bottom: -8px;
-    background-color: #ff6262;
+    background-color: #859dfe;
     display: flex;
     align-items: center;
     justify-content: center;
