@@ -18,7 +18,9 @@
         {% block body %}
             <div class="main-container relative">
                 <div class="main-container-inner">
-                    {% include '/include/header.html.twig' %}
+                {% include '/include/leftSide.html.twig' %}
+                {% include '/include/rightSide.html.twig' %}
+                    {# {% include '/include/header.html.twig' %}
                     {% include '/include/menu.html.twig' %}
                     <div class="content">
                         <div class="breadcrumbs-container">
@@ -32,7 +34,7 @@
                             {% block content %}
                             {% endblock %}
                         </div>
-                    </div
+                    </div> #}
                 </div>
             </div>
         {% endblock %}
