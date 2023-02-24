@@ -6,7 +6,7 @@ controllers:
 # HOMEPAGE
 app_homepage:
     path: /
-    controller: App\Controller\HomePageController::index
+    controller: App\Controller\HomepageController::index
 # SECURITY
 app_login:
     path: /login
