@@ -3,6 +3,10 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+# HOMEPAGE
+app_homepage:
+    path: /
+    controller: App\Controller\HomePageController::index
 # SECURITY
 app_login:
     path: /login
