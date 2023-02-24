@@ -10,6 +10,10 @@ body {
     height: 100vh;
     padding: 0;
     font-family: system-ui;
+    background-color: #dfe2f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .form-basic-container {
     max-width: 70%;
@@ -164,6 +168,9 @@ a {
 .p-10 {
     padding: 10px;
 }
+.pr-15 {
+    padding-right: 15px;
+}
 .relative {
     position: relative;
 }
@@ -203,7 +210,26 @@ a {
     justify-content: center;
 }
 .main-container {
-    min-height: calc(100vh - 80px);
+    background-color: #e7eef7;
+    height: 900px;
+    width: 1280px;
+    border-radius: 12px;
+}
+.main-container-inner {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.left-side-container {
+    width: 280px;
+    background-color: #5b7cfd;
+    color: white;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+.left-side-inner {
+    height: 100%;
+    box-sizing: border-box;
 }
 .content {
     margin-left: 250px;
@@ -216,6 +242,34 @@ a {
     margin-top: 0px;
     min-height: calc(100vh - 130px);
 }
+.logo {
+    padding: 42px;
+    display: flex;
+    font-size: 32px;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.user-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.user-image {
+    font-size: 92px;
+}
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.user-name {
+    font-size: 18px;
+}
+.user-email {
+    font-size: 14px;
+    color: #89a1fd;
+}
+
 /* BREADCRUMBS */
 .breadcrumbs-container {
     height: 50px;
@@ -240,6 +294,22 @@ a {
 }
 /* MENU */
 .menu-container {
+    width: auto;
+}
+.menu-inner {
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    color: #859dfe;
+    font-size: 18px;
+}
+.menu-element {
+    display: flex;
+    height: 42px;
+    align-items: center;
+    padding-left: 60px;
+}
+/* .menu-container {
     width: 250px;
     height: calc(100vh - 60px);
 }
@@ -302,7 +372,7 @@ a {
     padding-left: 40px;
     font-size: 16px;
     border-bottom: 1px solid #e9eaec;
-}
+} */
 /* LOGIN PANEL */
 .panel-layout-gradient {
     height: 100%;

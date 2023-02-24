@@ -1,0 +1,73 @@
+<div data-controller="mouse" class="menu-container absolute">
+    <div class="menu-container-inner">
+        <div class="menu-name">
+            <p>
+                Menu
+            </p>
+        </div>
+        <div class="menu-blocks">
+            <div class="menu-block block-parent hover-gray">
+                <div class="menu-block-inner">
+                    <div class="menu-block-js" data-action="mouseover->mouse#showElement mouseout->mouse#hideElement">
+                    </div>
+                    <i class="fa-solid fa-money-bill-wave pr-10"></i>
+                    <span>
+                        Płatność
+                    </span>
+                </div>
+                <div class="block-child-container" data-action="mouseover->mouse#mouseOver mouseout->mouse#mouseOut">
+                    <a href="/payment/add" class="block-child-1">
+                        Dodaj płatność
+                    </a>
+                    <a href="/payments/made/list" class="block-child-1">
+                        Lista wykonanych płatności
+                    </a>
+                        <a href="/payments/clearing/list" class="block-child-1">
+                        Płatności do rozliczenia
+                    </a>
+                </div>
+            </div>
+            <div class="menu-block block-parent hover-gray">
+                <div class="menu-block-inner">
+                    <div class="menu-block-js" data-action="mouseover->mouse#showElement mouseout->mouse#hideElement">
+                    </div>
+                    <i class="fa-solid fa-user-group pr-10"></i>
+                    <span>
+                        Znajomi
+                    </span>
+                </div>
+                <div class="block-child-container" data-action="mouseover->mouse#mouseOver mouseout->mouse#mouseOut">
+                    <a href="/friend/add" class="block-child-1">
+                        Dodaj znajomego
+                    </a>
+                    <a href="/friends" class="block-child-1">
+                        Lista znajomych
+                    </a>
+                </div>
+            </div>
+            <div class="menu-block block-parent hover-gray">
+                <div class="menu-block-inner">
+                    <div class="menu-block-js" data-action="mouseover->mouse#showElement mouseout->mouse#hideElement">
+                    </div>
+                    <i class="fa-solid fa-receipt pr-10"></i>
+                    <span>
+                        Rozliczenia
+                    </span>
+                </div>
+                <div class="block-child-container" data-action="mouseover->mouse#mouseOver mouseout->mouse#mouseOut">
+                    <a href="/billings" class="block-child-1">
+                        Raport rozliczeń
+                    </a>
+                </div>
+            </div>
+            <div class="menu-block hover-gray">
+                <div class="menu-block-inner">
+                    <i class="fa-solid fa-gear pr-10"></i>
+                    <a href="/settings">
+                        Ustawienia
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
