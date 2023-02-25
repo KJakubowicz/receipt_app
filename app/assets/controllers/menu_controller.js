@@ -31,7 +31,6 @@ export default class extends Controller {
     }
 
     getUserInfor() {
-        console.log(config);
         return {
             name: "Kamil Jakubowicz",
             email: "kjakubowicz98@interia.pl",
