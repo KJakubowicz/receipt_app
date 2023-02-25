@@ -55,6 +55,11 @@ app_notification_list:
     path: /notifications
     controller: App\Controller\NotificationsController::list
 # API
-app_api_get_notifications:
-    path: /api/v1/notifications/get
+api_get_notifications:
+    path: /api/notifications/get
+    methods: GET
     controller: App\Controller\NotificationsController::getNotifications
+api_get_user_data:
+    path: /api/user/get
+    methods: GET
+    controller: App\Controller\UserController::getActiveUserData
