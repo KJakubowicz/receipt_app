@@ -1,6 +1,9 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
+    connect() {
+        this.setUserInfo();
+    }
     showHideList(event) {
         const menuElement = event.target.previousSibling.previousElementSibling;
         const display = menuElement.style.display;
@@ -16,5 +19,22 @@ export default class extends Controller {
 
         menuElement.style.display = style;
         arrow.setAttribute("class", arrowClass);
+    }
+
+    setUserInfo() {
+        const nameElement = document.getElementById("user-name");
+        const emailElement = document.getElementById("user-email");
+        const userData = this.getUserInfor();
+
+        nameElement.innerText = userData.name;
+        emailElement.innerText = userData.email;
+    }
+
+    getUserInfor() {
+        console.log(config);
+        return {
+            name: "Kamil Jakubowicz",
+            email: "kjakubowicz98@interia.pl",
+        };
     }
 }
