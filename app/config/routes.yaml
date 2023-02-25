@@ -62,4 +62,4 @@ api_get_notifications:
 api_get_user_data:
     path: /api/user/get
     methods: GET
-    controller: App\Controller\Api\UserApiController::getActiveUserData
+    controller: App\Controller\UserController::getActiveUserData

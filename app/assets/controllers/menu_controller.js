@@ -21,19 +21,26 @@ export default class extends Controller {
         arrow.setAttribute("class", arrowClass);
     }
 
-    setUserInfo() {
+    async setUserInfo() {
         const nameElement = document.getElementById("user-name");
         const emailElement = document.getElementById("user-email");
-        const userData = this.getUserInfor();
+        const userData = await this.getUserInfor();
 
         nameElement.innerText = userData.name;
         emailElement.innerText = userData.email;
     }
 
-    getUserInfor() {
+    async getUserInfor() {
+        const result = await fetch("http://beta.receipt.pl/api/user/get");
+        const jsonData = await result.json();
+        const response = JSON.parse(JSON.stringify(jsonData));
+        const name = response.data.name;
+        const surname = response.data.surname;
+        const email = response.data.email;
+
         return {
-            name: "Kamil Jakubowicz",
-            email: "kjakubowicz98@interia.pl",
+            name: name + " " + surname,
+            email: email,
         };
     }
 }
