@@ -9,7 +9,8 @@ use App\Builder\ListView\Builder\Notifications\NotificationsListBuilder;
 use App\Repository\NotificationsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Notifications;
-use Doctrine\Persistence\ManagerRegistry;
+use App\Serives\ResponseServices;
+use OpenApi\Annotations as OA;
 
 class NotificationsController extends AbstractController
 {
@@ -151,13 +152,24 @@ class NotificationsController extends AbstractController
     }
    
     /**
-     * getNotifications
-     *
-     * @return Response
-     */
+    * @OA\Tag(name="notifications")
+    */
     public function getNotifications(): Response
     {
-        $notificationsCount = $this->_repository->getUnreadedCount($this->getUser()->getId());
-        return $this->json($notificationsCount);
+        $response = new ResponseServices();
+
+        if(!$this->getUser()) {
+            $response->setStatus(400);
+            $response->setMessage('Błąd podczas pobierania danych');
+            $response->setData([]);
+        } else {
+            $notificationsCount = $this->_repository->getUnreadedCount($this->getUser()->getId());
+            $response->setStatus(200);
+            $response->setMessage('Poprawnie pobrano liczbę powiadomień');
+            $response->setData([
+                'notificationsCount' => $notificationsCount
+            ]);
+        }
+        return $this->json($response->getResponse());
     }
 }
