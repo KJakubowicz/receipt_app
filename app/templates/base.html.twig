@@ -19,7 +19,9 @@
             <div class="main-container relative">
                 <div class="main-container-inner">
                 {% include '/include/leftSide.html.twig' %}
-                {% include '/include/rightSide.html.twig' %}
+                {% block content %}
+                    {# {% include '/include/rightSide.html.twig' %} #}
+                {% endblock %}
                     {# {% include '/include/header.html.twig' %}
                     {% include '/include/menu.html.twig' %}
                     <div class="content">
@@ -31,8 +33,7 @@
                             </div>
                         </div>
                         <div class="content-inner p-10">
-                            {% block content %}
-                            {% endblock %}
+
                         </div>
                     </div> #}
                 </div>

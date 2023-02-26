@@ -3,7 +3,30 @@
 {% block title %}Hello FriendsController!{% endblock %}
 
 {% block content %}
-    <div class="list-view-content">
+<div class="right-side-container">
+    <div class="right-side-inner">
+        <div class="top-side">
+            <div class="top-title">
+                Nazwa strony
+            </div>
+            <div class="top-buttons-side">
+                {% include '/listView/buttons.html.twig' with {'buttons' : listView.buttons} %}
+            </div>
+        </div>
+        <div class="side-content">
+            <div class="list-view-content">
+                <div class="list-view-inner">
+                    <div class="list-view-data">
+                        {% include '/listView/header.html.twig' with {'headers' : listView.headers } %}
+                        {% include '/listView/rows.html.twig' with {'rows' : listView.rows} %}
+                        {% include '/listView/paggination.html.twig' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    {# <div class="list-view-content">
         <div class="list-view-inner">
             {% include '/listView/buttons.html.twig' with {'buttons' : listView.buttons} %}
             <div class="list-view-data">
@@ -12,5 +35,5 @@
                 {% include '/listView/paggination.html.twig' %}
             </div>
         </div>
-    </div>
+    </div> #}
 {% endblock %}
