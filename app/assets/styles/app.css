@@ -323,6 +323,7 @@ a {
     display: none;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
 }
 .element-child-1 {
     color: #859dfe;
@@ -357,6 +358,10 @@ a {
     top: 0;
     bottom: 0;
     max-height: 42px;
+}
+.element-child-1.active {
+    color: white;
+    font-weight: normal;
 }
 /* .menu-container {
     width: 250px;
