@@ -3,10 +3,21 @@
 {% block title %}Hello FriendsController!{% endblock %}
 
 {% block content %}
-    <div class="form-basic-container">
-        <div class="form-basic-inner">
-            {{ form_start(form) }}
-            {{ form_end(form) }}
+    <div class="right-side-container">
+        <div class="right-side-inner">
+            <div class="top-side">
+                <div class="top-title">
+                    Dodaj nową płatność
+                </div>
+            </div>
+            <div class="side-content">
+                <div class="form-basic-container">
+                    <div class="form-basic-inner">
+                        {{ form_start(form) }}
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
