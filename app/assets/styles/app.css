@@ -153,7 +153,7 @@ select {
     transition: 0.2s all ease;
 }
 .red-label {
-    color: red;
+    color: #fe4066;
 }
 .green-label {
     color: green;
@@ -548,6 +548,8 @@ a {
     background-color: white;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    justify-content: space-around;
+    font-weight: bold;
 }
 .list-header-element-inner {
     display: flex;
@@ -571,6 +573,7 @@ a {
     flex-direction: row;
     align-items: center;
     height: 50px;
+    justify-content: space-around;
 }
 .list-element-inner {
     display: flex;
