@@ -35,6 +35,7 @@ class PaymansMadeListBuilder extends ListBuilder {
                     'type' => 'number',
                     'value' => $rowNumber
                 ];
+
                 foreach ($row as $key => $value) {
                     switch (strtolower($key)) {
                         case 'id_owner':
@@ -70,6 +71,7 @@ class PaymansMadeListBuilder extends ListBuilder {
                             ];
                             break;
                         case 'type':
+                        case 'friend':
                         case 'content':
                             $temp[] = [
                                 'type' => 'column-xl',
@@ -84,22 +86,7 @@ class PaymansMadeListBuilder extends ListBuilder {
                             break;
                     }
                 }
-                // $temp[] = [
-                //     'type' => 'options',
-                //     'class' => 'options-basic',
-                //     'value' => [
-                //         [
-                //             'href' => '/friend/accept/'.$row['id_user'].'/'.$row['id'],
-                //             'label' => 'Akceptuj',
-                //             'type' => 'accept green-label',
-                //         ],
-                //         [
-                //             'href' => '/friend/decline/'.$row['id_user'].'/'.$row['id'],
-                //             'label' => 'Odrzuć',
-                //             'type' => 'decline',
-                //         ],
-                //     ]
-                // ];
+
                 $result[$i] = $temp;
                 $rowNumber++;
                 $i++;

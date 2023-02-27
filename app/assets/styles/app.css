@@ -29,7 +29,7 @@ body {
     padding: 14px;
     border-radius: 9px;
     border: 0;
-    background: #68b5cf;
+    background: #5b7cfd;
     color: white;
     font-size: 18px;
     width: 100%;
@@ -99,7 +99,7 @@ select {
     box-sizing: border-box;
     display: flex;
     height: 30px;
-    background-color: #c8e9f9;
+    background-color: #5b7cfd;
     padding-left: 15px;
     align-items: center;
 }
@@ -132,6 +132,7 @@ select {
     border: none;
     border-bottom: 1px solid #d1d1d1;
     font-size: 18px;
+    background-color: #e7eef7;
 }
 .basic-box input:focus-visible {
     outline: none;
@@ -153,7 +154,7 @@ select {
     transition: 0.2s all ease;
 }
 .red-label {
-    color: red;
+    color: #fe4066;
 }
 .green-label {
     color: green;
@@ -548,6 +549,8 @@ a {
     background-color: white;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    justify-content: space-around;
+    font-weight: bold;
 }
 .list-header-element-inner {
     display: flex;
@@ -571,6 +574,7 @@ a {
     flex-direction: row;
     align-items: center;
     height: 50px;
+    justify-content: space-around;
 }
 .list-element-inner {
     display: flex;

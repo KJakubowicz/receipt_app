@@ -89,7 +89,7 @@ class PaymentsController extends AbstractController
         );
         $listBuilder->addHeaderElement(
             [
-                'class' => 'basic',
+                'class' => 'large',
                 'text' => 'Osoba do rozliczenia'
             ],
         );
