@@ -94,6 +94,7 @@ select {
     border-top: 0;
     width: 100%;
     box-sizing: border-box;
+    color: white;
 }
 .select-child {
     box-sizing: border-box;
@@ -142,6 +143,7 @@ select {
     cursor: pointer;
     transition: 0.2s all ease;
     background: white;
+    color: black;
 }
 .hover:hover {
     opacity: 0.5;
@@ -566,6 +568,8 @@ a {
     width: 300px;
 }
 .list-rows-inner {
+    overflow-y: scroll;
+    max-height: 650px;
     display: flex;
     flex-direction: column;
 }
