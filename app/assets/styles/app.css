@@ -591,3 +591,42 @@ a {
     margin: auto;
     align-items: center;
 }
+.paggination-pages .paggination-prev {
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.paggination-pages .paggination-next {
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    border-left: none;
+}
+.paggination-prev,
+.paggination-next {
+    color: #acb1bc;
+    display: flex;
+    height: 25px;
+    width: 25px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #f0eff1;
+}
+.paggination-page-element {
+    color: #acb1bc;
+    border-right: 1px solid #f0eff1;
+    border-top: 1px solid #f0eff1;
+    border-bottom: 1px solid #f0eff1;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.paggination-container input {
+    width: 75px;
+    height: 25px;
+    color: #acb1bc;
+    border-radius: 5px;
+    border: 2px solid #f0eff1;
+    padding: 5px;
+    box-sizing: border-box;
+}
