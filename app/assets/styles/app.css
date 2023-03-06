@@ -384,70 +384,6 @@ a {
     color: #202a3f;
     font-weight: bold;
 }
-/* .menu-container {
-    width: 250px;
-    height: calc(100vh - 60px);
-}
-.menu-container-inner {
-    height: 100%;
-    box-shadow: 11px 0px 24px -4px rgb(31 31 31 / 69%);
-    -webkit-box-shadow: 7px 0px 10px 0px rgb(31 31 31 / 8%);
-    -moz-box-shadow: 11px 0px 24px -4px rgba(31, 31, 31, 0.69);
-}
-.menu-container-inner {
-    color: #0000008c;
-    font-size: 18px;
-    font-weight: 500;
-}
-.menu-block {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-.menu-block i {
-    width: 30px;
-}
-.menu-block-inner {
-    position: relative;
-    height: 40px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    padding-left: 21px;
-    box-sizing: border-box;
-}
-.menu-name {
-    -webkit-box-shadow: inset 0px -16px 46px -44px rgba(66, 68, 90, 1);
-    -moz-box-shadow: inset 0px -16px 46px -44px rgba(66, 68, 90, 1);
-    box-shadow: inset 0px -16px 46px -44px rgba(66, 68, 90, 1);
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.menu-container a {
-    color: #0000008c;
-}
-.menu-block-js {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-}
-.block-child-container {
-    width: 100%;
-    display: none;
-    flex-direction: column;
-}
-.block-child-1 {
-    display: flex;
-    height: 35px;
-    align-items: center;
-    padding-left: 40px;
-    font-size: 16px;
-    border-bottom: 1px solid #e9eaec;
-} */
 /* LOGIN PANEL */
 .panel-layout-gradient {
     height: 100%;
@@ -516,15 +452,6 @@ a {
     display: flex;
     align-items: center;
 }
-/* LISTVIEW */
-/* .list-view-content {
-    height: 800px;
-} */
-/* .list-view-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-} */
 .list-buttons-content {
     height: 55px;
     width: 100%;
@@ -637,4 +564,30 @@ a {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
+}
+/* PAGGINATION */
+.paggination-container {
+    background-color: white;
+    height: 50px;
+}
+.paggination-inner {
+    height: 100%;
+    position: relative;
+    padding: 0 30px;
+}
+.paggination-pages {
+    display: flex;
+    height: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.paggination-per-page {
+    display: flex;
+    position: absolute;
+    right: 30px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    align-items: center;
 }
