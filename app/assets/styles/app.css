@@ -633,7 +633,7 @@ a {
 .per-page-list {
     right: 0;
     position: absolute;
-    display: flex;
+    display: none;
     flex-direction: column;
     top: -74px;
     width: 45px;

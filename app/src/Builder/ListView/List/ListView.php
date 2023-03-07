@@ -8,7 +8,8 @@ class ListView {
     private array $_button = [];
     private array $_header = [];
     private array $_rows;
-    private int $_paggination;
+    private array $_paggination = [];
+    private array $_perPage = [];
 
     public function addButton(array $button):void
     { 
@@ -44,14 +45,26 @@ class ListView {
         return $this->_rows;
     }
 
-    public function setPaggination(int $paggination):void
+    public function addPaggination(array $paggination):void
     {
-        $this->_paggination = $paggination;
+        if (!empty($paggination)) {
+            $this->_paggination[] = $paggination;
+        }
     }
 
-    public function getPaggination():int
+    public function getPaggination():array
     {
         return $this->_paggination;
+    }
+
+    public function setPerPage(array $perPage):void
+    {
+        $this->_perPage = $perPage;
+    }
+
+    public function getPerPage():array
+    {
+        return $this->_perPage;
     }
 
     public function getListData():array
@@ -61,6 +74,7 @@ class ListView {
             'headers' => $this->getHeaders(),
             'rows' => $this->getRows(),
             'paggination' => $this->getPaggination(),
+            'per_page' => $this->getPerPage(),
         ];
     }
 

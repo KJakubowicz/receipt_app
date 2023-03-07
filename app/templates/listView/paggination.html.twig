@@ -1,41 +1,36 @@
 <div class="paggination-container">
     <div class="paggination-inner">
         <div class="paggination-pages">
-            <div class="paggination-prev hover">
+            <a href="?page=1" class="paggination-prev hover">
                 <i class="fa-solid fa-caret-left"></i>
-            </div>
-            <div class="paggination-page-element hover">
-                1
-            </div>
-            <div class="paggination-page-element hover">
-                2
-            </div>
-            <div class="paggination-page-element hover">
-                3
-            </div>
-            <div class="paggination-page-element hover">
-                4
-            </div>
-            <div class="paggination-next hover">
+            </a>
+            {% set lastPage = 0 %}
+            {% for element in paggination %}
+                <a href="{{element.href}}" class="paggination-page-element hover {% if element.active %} active {% endif %}">
+                    {{element.label}}
+                </a>
+                {% set lastPage = lastPage + 1 %}
+            {% endfor %}
+            <a href="?page={{lastPage}}" class="paggination-next hover">
                 <i class="fa-solid fa-caret-right"></i>
-            </div>
+            </a>
         </div>
 
-        <div class="paggination-per-page">
-            <span class="per-page-count hover">
+        <div class="paggination-per-page" data-controller="paggination">
+            <span class="per-page-count hover" data-action="click->paggination#showList">
                 13
             </span>
-            <div class="per-page-list">
-                <a class="count-list-element hover" href="?per=5">
+            <div class="per-page-list" id="per-page-list">
+                <a class="count-list-element hover" href="?per_page=5">
                     5
                 </a>
-                <a class="count-list-element hover" href="?per=10">
+                <a class="count-list-element hover" href="?per_page=10">
                     10
                 </a>
-                <a class="count-list-element hover" href="?per=20">
+                <a class="count-list-element hover" href="?per_page=20">
                     20
                 </a>
-                <a class="count-list-element hover" href="?per=30">
+                <a class="count-list-element hover" href="?per_page=30">
                     30
                 </a>
             </div>

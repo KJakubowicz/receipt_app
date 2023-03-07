@@ -53,6 +53,19 @@ class PaymentsRepository extends ServiceEntityRepository
         return $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
     }
 
+    public function findCountByIdUser($id_user): int
+    {
+        $query = $this->getEntityManager()->createQuery("
+            Select count(p.id)
+            From App\Entity\Payments p
+            Left join App\Entity\User u
+            With u.id = p.id_friend
+            Where p.id_user = :id_user
+        ")->setParameter('id_user', $id_user);
+        
+        return $query->getResult(\Doctrine\ORM\Query::HYDRATE_SINGLE_SCALAR);
+    }
+
     public function findClearingByIdUser($id): array
     {
         $query = $this->getEntityManager()->createQuery("
