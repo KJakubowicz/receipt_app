@@ -21,11 +21,11 @@
             </div>
         </div>
 
-        <div class="paggination-per-page">
-            <span class="per-page-count hover">
+        <div class="paggination-per-page" data-controller="paggination">
+            <span class="per-page-count hover" data-action="click->paggination#showList">
                 13
             </span>
-            <div class="per-page-list">
+            <div class="per-page-list" id="per-page-list">
                 <a class="count-list-element hover" href="?per=5">
                     5
                 </a>
