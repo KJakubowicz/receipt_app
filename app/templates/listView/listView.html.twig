@@ -19,7 +19,7 @@
                     <div class="list-view-data">
                         {% include '/listView/header.html.twig' with {'headers' : listView.headers } %}
                         {% include '/listView/rows.html.twig' with {'rows' : listView.rows} %}
-                        {% include '/listView/paggination.html.twig' %}
+                        {% include '/listView/paggination.html.twig' with {'paggination' : listView.paggination, 'perPage' : listView.per_page} %}
                     </div>
                 </div>
             </div>

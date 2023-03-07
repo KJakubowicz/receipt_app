@@ -95,9 +95,14 @@ class PaymansMadeListBuilder extends ListBuilder {
         return $result;
     }
 
-    public function setPaggination(int $paggination = 0): void
+    public function addPaggination(array $paggination = []): void
     {
-        $this->listView->setPaggination($paggination);
+        $this->listView->addPaggination($paggination);
+    }
+
+    public function setPerPage(array $perPage = []): void
+    {
+        $this->listView->setPerPage($perPage);
     }
 
     public function getListData(): array

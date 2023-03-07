@@ -14,6 +14,7 @@ use App\Form\PaymentsAddFormType;
 use DateTimeImmutable;
 use App\Helper\FriendsHelper;
 use App\Repository\FriendsRepository;
+use App\Helper\ListHelper;
 
 class PaymentsController extends AbstractController
 {
@@ -52,8 +53,10 @@ class PaymentsController extends AbstractController
         $this->_friendsRepository = $friendsRepository;
     }
 
-    public function madePaymentsList(): Response
+    public function madePaymentsList(Request $request): Response
     {
+        (int) $page = ($request->get('page')) ? $request->get('page') : 1;
+
         $listBuilder = new PaymansMadeListBuilder();
         $listBuilder->addButton([
             'type' => 'add',
@@ -93,10 +96,20 @@ class PaymentsController extends AbstractController
                 'text' => 'Osoba do rozliczenia'
             ],
         );
+        $count = $this->_repository->findCountByIdUser($this->getUser()->getId());
 
         $rows = $this->_repository->findByIdUser($this->getUser()->getId());
         $listBuilder->setRows($rows);
-        $listBuilder->setPaggination(0);
+        $pageCount = ListHelper::getPageCount($count, ($request->get('per_page')) ? $request->get('per_page') : 0);
+
+        for ($i=1; $i <= $pageCount; $i++) { 
+            $active = ($i === (int) $page) ? true : false;
+            $listBuilder->addPaggination([
+                'label' => $i,
+                'href' => '?page='.$i,
+                'active' => $active
+            ]);
+        }
         $listView = new ListMaker($listBuilder);
 
         return $this->render('listView/listView.html.twig', [

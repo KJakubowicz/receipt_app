@@ -19,7 +19,9 @@ abstract class ListBuilder {
 
     abstract public function setRows(): void;
 
-    abstract public function setPaggination(): void;
+    abstract public function addPaggination(): void;
+
+    abstract public function setPerPage(): void;
 
     abstract public function getListData(): array;
 }
