@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Helper\FriendsHelper;
 use App\Controller\NotificationsController;
 use DateTimeImmutable;
+use App\Helper\ListHelper;
 
 /**
  * FriendsController
@@ -62,7 +63,7 @@ class FriendsController extends AbstractController
      *
      * @return Response
      */
-    public function list(): Response
+    public function list(Request $request): Response
     {
         $listBuilder = new FriendsListBuilder();
         $listBuilder->addButton([
@@ -99,22 +100,17 @@ class FriendsController extends AbstractController
         );
         $rows = $this->_repository->findByUserId($this->getUser()->getId());
         $listBuilder->setRows($rows);
-        $listBuilder->addPaggination([
-            'label' => '1',
-            'href' => '?page=1'
-        ]);
-        $listBuilder->addPaggination([
-            'label' => '2',
-            'href' => '?page=2'
-        ]);
-        $listBuilder->addPaggination([
-            'label' => '3',
-            'href' => '?page=3'
-        ]);
-        $listBuilder->addPaggination([
-            'label' => '4',
-            'href' => '?page=4'
-        ]);
+
+        $pageCount = ListHelper::getPageCount(count($rows), ($request->get('per_page')) ? $request->get('per_page') : 0);
+        
+        for ($i=1; $i <= $pageCount; $i++) { 
+            $active = ($i === $request->get('page')) ? true : false;
+            $listBuilder->addPaggination([
+                'label' => $i,
+                'href' => '?page='.$i,
+                'active' => $active
+            ]);
+        }
 
         $listView = new ListMaker($listBuilder);
 

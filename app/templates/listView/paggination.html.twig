@@ -6,7 +6,7 @@
             </a>
             {% set lastPage = 0 %}
             {% for element in paggination %}
-                <a href="{{element.href}}" class="paggination-page-element hover">
+                <a href="{{element.href}}" class="paggination-page-element hover {% if element.active %} active {% endif %}">
                     {{element.label}}
                 </a>
                 {% set lastPage = lastPage + 1 %}
