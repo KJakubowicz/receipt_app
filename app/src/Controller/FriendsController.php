@@ -99,7 +99,23 @@ class FriendsController extends AbstractController
         );
         $rows = $this->_repository->findByUserId($this->getUser()->getId());
         $listBuilder->setRows($rows);
-        $listBuilder->setPaggination(0);
+        $listBuilder->addPaggination([
+            'label' => '1',
+            'href' => '?page=1'
+        ]);
+        $listBuilder->addPaggination([
+            'label' => '2',
+            'href' => '?page=2'
+        ]);
+        $listBuilder->addPaggination([
+            'label' => '3',
+            'href' => '?page=3'
+        ]);
+        $listBuilder->addPaggination([
+            'label' => '4',
+            'href' => '?page=4'
+        ]);
+
         $listView = new ListMaker($listBuilder);
 
         return $this->render('listView/listView.html.twig', [
