@@ -102,7 +102,7 @@ class PaymentsController extends AbstractController
         $listBuilder->setRows($rows);
         $pageCount = ListHelper::getPageCount($count, ($request->get('per_page')) ? $request->get('per_page') : 0);
 
-        for ($i=1; $i <= $pageCount; $i++) { 
+        for ($i = 1; $i <= $pageCount; $i++) { 
             $active = ($i === (int) $page) ? true : false;
             $listBuilder->addPaggination([
                 'label' => $i,

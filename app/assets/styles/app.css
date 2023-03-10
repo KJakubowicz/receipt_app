@@ -582,6 +582,9 @@ a {
     align-items: center;
     justify-content: center;
 }
+.paggination-pages .paggination-page-element.active {
+    background-color: #f5f6f8;
+}
 .paggination-per-page {
     display: flex;
     position: absolute;
