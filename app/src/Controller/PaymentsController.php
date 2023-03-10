@@ -56,7 +56,7 @@ class PaymentsController extends AbstractController
     public function madePaymentsList(Request $request): Response
     {
         (int) $page = ($request->get('page')) ? $request->get('page') : 1;
-
+        (int) $perPage = ($request->get('per_page')) ? $request->get('per_page') : 13;
         $listBuilder = new PaymansMadeListBuilder();
         $listBuilder->addButton([
             'type' => 'add',
@@ -98,11 +98,11 @@ class PaymentsController extends AbstractController
         );
         $count = $this->_repository->findCountByIdUser($this->getUser()->getId());
 
-        $rows = $this->_repository->findByIdUser($this->getUser()->getId());
+        $rows = $this->_repository->findByIdUser($this->getUser()->getId(), $perPage, $page);
         $listBuilder->setRows($rows);
-        $pageCount = ListHelper::getPageCount($count, ($request->get('per_page')) ? $request->get('per_page') : 0);
+        $pageCount = ListHelper::getPageCount($count, $perPage);
 
-        for ($i=1; $i <= $pageCount; $i++) { 
+        for ($i = 1; $i <= $pageCount; $i++) { 
             $active = ($i === (int) $page) ? true : false;
             $listBuilder->addPaggination([
                 'label' => $i,

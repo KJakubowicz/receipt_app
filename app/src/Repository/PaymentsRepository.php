@@ -39,7 +39,7 @@ class PaymentsRepository extends ServiceEntityRepository
         }
     }
 
-    public function findByIdUser($id_user): array
+    public function findByIdUser(int $id_user, int $limit, int $offset): array
     {
         $query = $this->getEntityManager()->createQuery("
             Select p.id, p.name, p.price, p.id_user, p.status,
@@ -48,7 +48,9 @@ class PaymentsRepository extends ServiceEntityRepository
             Left join App\Entity\User u
             With u.id = p.id_friend
             Where p.id_user = :id_user
-        ")->setParameter('id_user', $id_user);
+        ")->setParameter('id_user', $id_user)
+        ->setFirstResult($offset)
+        ->setMaxResults($limit);
         
         return $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
     }

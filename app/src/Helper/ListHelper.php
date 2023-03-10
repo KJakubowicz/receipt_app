@@ -17,7 +17,6 @@ class ListHelper
      */
     public static function getPageCount(int $rowsCount, int $perPage):int
     {
-        $perPage = ($perPage > 0) ? $perPage : 13;
         $pageCount = ceil($rowsCount/$perPage);
         
         return (int) $pageCount;
