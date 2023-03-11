@@ -97,7 +97,6 @@ class PaymentsController extends AbstractController
             ],
         );
         $count = $this->_repository->findCountByIdUser($this->getUser()->getId());
-
         $rows = $this->_repository->findByIdUser($this->getUser()->getId(), $perPage, $page);
         $listBuilder->setRows($rows);
         $pageCount = ListHelper::getPageCount($count, $perPage);
@@ -129,8 +128,11 @@ class PaymentsController extends AbstractController
      *
      * @return Response
      */
-    public function clearingPaymentsList(): Response
+    public function clearingPaymentsList(Request $request): Response
     {
+        (int) $page = ($request->get('page')) ? $request->get('page') : 1;
+        (int) $perPage = ($request->get('per_page')) ? $request->get('per_page') : 13;
+
         $listBuilder = new PaymansClearingListBuilder();
 
         $listBuilder->addHeaderElement(
@@ -170,9 +172,20 @@ class PaymentsController extends AbstractController
             ],
         );
 
-        $rows = $this->_repository->findClearingByIdUser($this->getUser()->getId());
+        $count = $this->_repository->findCountClearingByIdUser($this->getUser()->getId());
+        $rows = $this->_repository->findClearingByIdUser($this->getUser()->getId(), $perPage, $page);
         $listBuilder->setRows($rows);
-        $listBuilder->setPaggination(0);
+        $pageCount = ListHelper::getPageCount($count, $perPage);
+
+        for ($i = 1; $i <= $pageCount; $i++) { 
+            $active = ($i === (int) $page) ? true : false;
+            $listBuilder->addPaggination([
+                'label' => $i,
+                'value' => $i,
+                'active' => $active
+            ]);
+        }
+
         $listView = new ListMaker($listBuilder);
 
         return $this->render('listView/listView.html.twig', [
