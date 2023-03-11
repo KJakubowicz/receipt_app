@@ -65,6 +65,8 @@ class FriendsController extends AbstractController
      */
     public function list(Request $request): Response
     {
+        (int) $page = ($request->get('page')) ? $request->get('page') : 1;
+        (int) $perPage = ($request->get('per_page')) ? $request->get('per_page') : 13;
         $listBuilder = new FriendsListBuilder();
         $listBuilder->addButton([
             'type' => 'add',
@@ -98,16 +100,17 @@ class FriendsController extends AbstractController
                 'text' => 'Opcje'
             ],
         );
-        $rows = $this->_repository->findByUserId($this->getUser()->getId());
+        $count = $this->_repository->findCountByUserId($this->getUser()->getId());
+        $rows = $this->_repository->findByUserId($this->getUser()->getId(), $perPage, $page);
         $listBuilder->setRows($rows);
 
-        $pageCount = ListHelper::getPageCount(count($rows), ($request->get('per_page')) ? $request->get('per_page') : 0);
-        
+        $pageCount = ListHelper::getPageCount($count, $perPage);
+            
         for ($i=1; $i <= $pageCount; $i++) { 
             $active = ($i === $request->get('page')) ? true : false;
             $listBuilder->addPaggination([
                 'label' => $i,
-                'href' => '?page='.$i,
+                'value' => $i,
                 'active' => $active
             ]);
         }

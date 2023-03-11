@@ -39,7 +39,7 @@ class FriendsRepository extends ServiceEntityRepository
         }
     }
 
-    public function findByUserId($id): array
+    public function findByUserId(int $id, int $limit, int $offset): array
     {
         $query = $this->getEntityManager()->createQuery("
             Select
@@ -61,9 +61,36 @@ class FriendsRepository extends ServiceEntityRepository
                 f.confirmed = :confirmed
         ")
         ->setParameter('id', $id)
-        ->setParameter('confirmed', 1);
+        ->setParameter('confirmed', 1)
+        ->setFirstResult($offset)
+        ->setMaxResults($limit);
 
         return $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+    }
+
+    public function findCountByUserId($id): int
+    {
+        $query = $this->getEntityManager()->createQuery("
+            Select
+                count(f.id)
+            From App\Entity\Friends f
+            Left join App\Entity\User u 
+                With u.id = f.id_user
+                And u.id != :id
+            Left join App\Entity\User u2
+                With u2.id = f.id_owner
+                And u2.id != :id
+            Where 
+                f.id_owner = :id AND
+                f.confirmed = :confirmed 
+                OR
+                f.id_user = :id AND
+                f.confirmed = :confirmed
+        ")
+        ->setParameter('id', $id)
+        ->setParameter('confirmed', 1);
+
+        return $query->getResult(\Doctrine\ORM\Query::HYDRATE_SINGLE_SCALAR);
     }
 
     public function findFriendsByUserId($id): array
