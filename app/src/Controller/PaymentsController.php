@@ -106,7 +106,7 @@ class PaymentsController extends AbstractController
             $active = ($i === (int) $page) ? true : false;
             $listBuilder->addPaggination([
                 'label' => $i,
-                'href' => '?page='.$i,
+                'value' => $i,
                 'active' => $active
             ]);
         }
