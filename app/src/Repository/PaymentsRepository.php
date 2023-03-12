@@ -39,7 +39,7 @@ class PaymentsRepository extends ServiceEntityRepository
         }
     }
 
-    public function findByIdUser($id_user): array
+    public function findByIdUser(int $id_user, int $limit, int $offset): array
     {
         $query = $this->getEntityManager()->createQuery("
             Select p.id, p.name, p.price, p.id_user, p.status,
@@ -48,7 +48,9 @@ class PaymentsRepository extends ServiceEntityRepository
             Left join App\Entity\User u
             With u.id = p.id_friend
             Where p.id_user = :id_user
-        ")->setParameter('id_user', $id_user);
+        ")->setParameter('id_user', $id_user)
+        ->setFirstResult($offset)
+        ->setMaxResults($limit);
         
         return $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
     }
@@ -66,7 +68,22 @@ class PaymentsRepository extends ServiceEntityRepository
         return $query->getResult(\Doctrine\ORM\Query::HYDRATE_SINGLE_SCALAR);
     }
 
-    public function findClearingByIdUser($id): array
+    public function findCountClearingByIdUser($id_user): int
+    {
+        $query = $this->getEntityManager()->createQuery("
+            Select count(p.id)
+            From App\Entity\Payments p
+            Left join App\Entity\User u
+            With u.id = p.id_user
+            Where p.id_friend = :id_friend
+            And p.status = :status
+        ")->setParameter('id_friend', $id_user)
+        ->setParameter('status', false);;
+        
+        return $query->getResult(\Doctrine\ORM\Query::HYDRATE_SINGLE_SCALAR);
+    }
+
+    public function findClearingByIdUser(int $id, int $limit, int $offset): array
     {
         $query = $this->getEntityManager()->createQuery("
             Select p.id, p.name, p.price, p.id_user, p.status,
@@ -77,7 +94,9 @@ class PaymentsRepository extends ServiceEntityRepository
             Where p.id_friend = :id_friend
             And p.status = :status
         ")->setParameter('id_friend', $id)
-        ->setParameter('status', false);
+        ->setParameter('status', false)
+        ->setFirstResult($offset)
+        ->setMaxResults($limit);
         
         return $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
     }
